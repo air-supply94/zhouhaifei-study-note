@@ -1,0 +1,11 @@
+.cache
+.vscode
+
+node_modules
+.idea
+.umi
+.umi-production
+
+dist
+.DS_Store
+*.log
