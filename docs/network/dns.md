@@ -1,7 +1,15 @@
+---
+title: DNS
+order: 8
+---
+
+### frame
+
 ![](../assets/network/dnsFrame.png)
 
-- 定义---domain 和 ip 的映射、回答更多关于网路和主机的其它信息
-- `应用层`
+### 定义
+
+domain 和 ip 的映射、回答更多关于网路和主机的其它信息。`应用层`
 
 ### 域名结构
 

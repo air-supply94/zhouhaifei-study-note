@@ -1,6 +1,6 @@
 ---
 title: js-core
-order: 12
+order: 13
 ---
 
 ### 标识符
@@ -116,7 +116,7 @@ return F
 3. Return Result(2).
 4. If the [[Prototype]] of O is null, return undefined.
 5. Call the [[Get]] method of [[Prototype]] with property name P.
-	6. Return Result(5).
+6. Return Result(5).
 ```
 
 ### [[put]]

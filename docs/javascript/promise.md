@@ -3,7 +3,7 @@ title: promise
 order: 7
 ---
 
-### 原理
+### promise.js
 
 ```js
 class Promise {
@@ -184,7 +184,7 @@ class Promise {
 module.exports = Promise;
 ```
 
-### 测试
+### package.json
 
 ```json
 {

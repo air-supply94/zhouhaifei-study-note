@@ -5,12 +5,9 @@ export default defineConfig({
   title: '学习笔记',
   base: isProduction ? '/zhouhaifei-study-note/' : undefined,
   publicPath: isProduction ? 'https://air-supply94.github.io/zhouhaifei-study-note/' : undefined,
-
-  // favicon: null,
-  // logo: null,
   outputPath: 'dist',
-  hash: true,
   mode: 'site',
+  hash: true,
   locales: [
     [
       'zh-CN',
