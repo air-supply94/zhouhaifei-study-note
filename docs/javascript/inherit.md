@@ -1,3 +1,8 @@
+---
+title: inherit
+order: 1
+---
+
 ### 原理
 
 ```js

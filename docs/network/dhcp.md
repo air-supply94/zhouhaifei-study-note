@@ -13,7 +13,7 @@
 
 ### 工作原理
 
-![](../assets/net/dhcpFirst.png)
+![](../assets/network/dhcpFirst.png)
 
 - **寻找 Server**。向网路发出一个**DHCPDISCOVER**封包。封包的来源位址会为 0.0.0.0 ﹐而目的位址则为 255.255.255.255 ﹐然后再附上 Dhcpdiscover 的信息﹐向网路进行广播
 - **提供 IP 租用位址**。当 DHCP 伺服器监听到客户端发出的 Dhcpdiscover 广播后﹐它会从那些还没有租出的位址范围内﹐选择最前面的的空置 IP ，连同其它 TCP/IP 设定，回应给客户端一个**DHCPOFFER**封包

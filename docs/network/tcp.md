@@ -5,7 +5,7 @@
   - 防⽌止具有相同「四元组」的「旧」数据包被收到
   - 保证「被动关闭连接」的一方能被正确的关闭，即保证最后的 ACK 能让被动关闭⽅方接收，从⽽而帮 助其正常关闭
 
-![](../assets/net/tcpFrame.png)
+![](../assets/network/tcpFrame.png)
 
 - netstat -n 显示套接字内容(ip)
 
@@ -17,13 +17,13 @@
 
 - 拥堵机制
 
-![](../assets/net/windowStart.png)
+![](../assets/network/windowStart.png)
 
 - RTO 后---RFC 建议把拥塞窗口降到 1 个 MSS，而 RFC 5681 则认为应该是发生拥塞时没被确认的数据量的 1/2，但不能小于 2 个 MSS
 - 少量丢包或者校验不对---每收到一个包就 Ack 一次期望的 Seq 号，以此提醒发送方重传。当发送方收到 3 个或以上重复确认（Dup Ack）时重传（`快速重传`）
 - 快速恢复---如果在拥塞避免阶段发生了快速重传，传慢点就可。RFC 5681 建议临界窗口值应该设为发生拥塞时还没被确认的数据量的 1/2（但不能小于 2 个 MSS）。然后将拥塞窗口设置为临界窗口值加 3 个 MSS
 
-![](../assets/net/windowStartDrop.png)
+![](../assets/network/windowStartDrop.png)
 
 - Westwood 算法
 

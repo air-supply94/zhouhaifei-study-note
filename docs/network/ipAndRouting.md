@@ -1,6 +1,6 @@
 ## IP
 
-![ipFrame](../assets/net/ipFrame.png)
+![ipFrame](../assets/network/ipFrame.png)
 
 ### 主要功能
 

@@ -1,3 +1,8 @@
+---
+title: instanceof
+order: 2
+---
+
 ### 原理
 
 ```js

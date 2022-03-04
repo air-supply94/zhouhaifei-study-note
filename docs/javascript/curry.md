@@ -1,3 +1,8 @@
+---
+title: curry
+order: 4
+---
+
 ### 原理
 
 ```js

@@ -34,11 +34,11 @@
   - 路由器是在不同网络间移动数据，相当于传统所说的 IP 网关（IP gateway）
 - Frame(1518)
 
-![frame](../assets/net/frame.png)
+![frame](../assets/network/frame.png)
 
 ### [OSI](http://www.study-area.org/network/network_ip_model.htm)
 
-![osi](../assets/net/osi.png)
+![osi](../assets/network/osi.png)
 
 - **实体层**---在这层里面作出一些机械和电子方面的决定﹐也就是要定义出在终端和网络之间要使用的设备
 - **资料连接层**---保证一个无错误的物理上的数据传输

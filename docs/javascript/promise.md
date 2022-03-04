@@ -1,3 +1,8 @@
+---
+title: promise
+order: 7
+---
+
 ### 原理
 
 ```js

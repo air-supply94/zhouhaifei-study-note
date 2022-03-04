@@ -1,3 +1,8 @@
+---
+title: async
+order: 10
+---
+
 ### 概念
 
 - Generator 函数的语法糖

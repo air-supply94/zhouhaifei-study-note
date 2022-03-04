@@ -1,3 +1,8 @@
+---
+title: bind
+order: 3
+---
+
 ### 原理
 
 ```js

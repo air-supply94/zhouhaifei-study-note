@@ -1,6 +1,6 @@
 ### [参考](http://www.study-area.org/network/network_ip_arp.htm)
 
-![arpFrame](../assets/net/arpFrame.png)
+![arpFrame](../assets/network/arpFrame.png)
 
 - ARP---ip 地址和 mac 地址的映射
 - arp -a 显示

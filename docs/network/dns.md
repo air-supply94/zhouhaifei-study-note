@@ -1,11 +1,11 @@
-![](../assets/net/dnsFrame.png)
+![](../assets/network/dnsFrame.png)
 
 - 定义---domain 和 ip 的映射、回答更多关于网路和主机的其它信息
 - `应用层`
 
 ### 域名结构
 
-![域名结构](../assets/net/domainStructure.png)
+![域名结构](../assets/network/domainStructure.png)
 
 ### 类别名称
 
@@ -21,7 +21,7 @@
 
 ### 查找过程
 
-![](../assets/net/nslookup.png)
+![](../assets/network/nslookup.png)
 
 ### 命令
 
