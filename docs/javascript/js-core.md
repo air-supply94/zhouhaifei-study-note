@@ -12,7 +12,7 @@ order: 13
 - this=null--->this=window(es3)
 - 10.1.6------只有全局的 VO 能直接访问，AO 是不能直接访问的。此时 this=null
 - 10.2.3----如果 caller 提供的不是 obj，（null 不是对象），那么 this 值为 window
-- 11.2.3 Function Calls---GetBase() ###object
+- 11.2.3 Function Calls---GetBase()
   - 任何时间创建或设置对象 O 的非内部属性时，将立即使用与 O 连接的所有对象中的相同值和属性创建或设置相应的属性 。
   - 任何时候，对象 O 的非内部属性都被删除，所有与 O 连接的对象中的对象都将被立即删除
 
