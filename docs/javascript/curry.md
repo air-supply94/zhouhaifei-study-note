@@ -7,13 +7,21 @@ order: 4
 
 ```js
 function curry(fn, args) {
+  if (typeof fn !== 'function') {
+    throw new Error('fn not funtion');
+  }
+
   var length = fn.length;
 
   args = Array.isArray(args) ? args : [];
 
   return function () {
-    var _args = args.slice(0).concat(Array.prototype.slice.call(arguments));
-    return _args.length < length ? curry.call(this, fn, _args) : fn.apply(this, _args);
+    var _args = args.concat(Array.prototype.slice.call(arguments));
+    if (_args.length < length) {
+      return curry.call(this, fn, _args);
+    } else {
+      return fn.apply(this, _args);
+    }
   };
 }
 ```

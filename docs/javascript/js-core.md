@@ -7,55 +7,93 @@ order: 13
 
 函数名、变量名、函数的参数名称、全局对象非限定属性的名称
 
+### EC
+
+- 只有一个全局上下文，每次调用一个函数都进入执行上下文评估代码类型
+- Stack
+- 处理上下文阶段
+  - enter execution Context
+  - code execution
+
+### VO
+
+- 函数声明、变量声明、函数形参
+- global variable: 在任何 EC 前创建的对象，其属性可以在程序的任何位置引用，程序退出才会被清除
+- 函数的 VO ===AO: 激活函数时，AO 创建
+
+### Scope chain
+
+- EC 相关的属性，用于变量的查找
+- Scope Chain = [[Scope]] + AO
+- function create
+  - [[Scope]]存储所有父对象[[Scope]]
+  - new Function() [[Scope]] 只包含全局对象
+- function call
+  - AO 填充
+  - 注意 prototype chain
+  - eval 和 caller
+  - with 和 catch
+
 ### this
 
-- this=null--->this=window(es3)
-- 10.1.6------只有全局的 VO 能直接访问，AO 是不能直接访问的。此时 this=null
-- 10.2.3----如果 caller 提供的不是 obj，（null 不是对象），那么 this 值为 window
-- 11.2.3 Function Calls---GetBase()
-  - 任何时间创建或设置对象 O 的非内部属性时，将立即使用与 O 连接的所有对象中的相同值和属性创建或设置相应的属性 。
-  - 任何时候，对象 O 的非内部属性都被删除，所有与 O 连接的对象中的对象都将被立即删除
+- 是 EC 的属性。在进入 EC 时确定且在 EC 运行时不变
+- 由 caller 提供，并且由调用表达式的形式决定(Reference)
+- 一个 caller 调用一个 callee: AO.callee = null.callee
+- with 和 try catch
+- 严格模式，没有隐式 window
+
+### function
+
+- declaration
+  - 需要一个名字
+  - 全局或者在函数内部
+  - entering EC then create
+  - 影响 VO
+- expression
+  - 只在表达式位置定义
+  - 可以有一个可选的名称
+  - 内部函数递归也可以用此名字，但外部不能访问
+  - 对 VO 没有影响
+  - 在 code 执行阶段 create
 
 ### 对象创建
 
-```js
-/**
- F.[[Construct]](initialParameters):
+```
+F.[[Construct]](initialParameters):
 
- O = new NativeObject();
+O = new NativeObject();
 
- // property [[Class]] is set to "Object", i.e. simple object
- O.[[Class]] = "Object"
+// property [[Class]] is set to "Object", i.e. simple object
+O.[[Class]] = "Object"
 
- // get the object on which
- // at the moment references F.prototype
- var __objectPrototype = F.prototype;
+// get the object on which
+// at the moment references F.prototype
+var __objectPrototype = F.prototype;
 
- // if __objectPrototype is an object, then:
- O.[[Prototype]] = __objectPrototype
- // else:
- O.[[Prototype]] = Object.prototype;
- // where O.[[Prototype]] is the prototype of the object
+// if __objectPrototype is an object, then:
+O.[[Prototype]] = __objectPrototype
+// else:
+O.[[Prototype]] = Object.prototype;
+// where O.[[Prototype]] is the prototype of the object
 
- // initialization of the newly created object
- // applying the F.[[Call]]; pass:
- // as this value – newly created object - O,
- // arguments are the same as initialParameters for F
- R = F.[[Call]](initialParameters); this === O;
- // where R is the returned value of the [[Call]]
- // in JS view it looks like:
- // R = F.apply(O, initialParameters);
+// initialization of the newly created object
+// applying the F.[[Call]]; pass:
+// as this value – newly created object - O,
+// arguments are the same as initialParameters for F
+R = F.[[Call]](initialParameters); this === O;
+// where R is the returned value of the [[Call]]
+// in JS view it looks like:
+// R = F.apply(O, initialParameters);
 
- // if R is an object
- return R
- // else
- return O
- */
+// if R is an object
+return R
+// else
+return O
 ```
 
 ### 函数创建
 
-```js
+```
 
 F = new NativeObject();
 
@@ -105,19 +143,19 @@ return F
 
 ### [[class]]
 
-指示此对象的种类的字符串值，Object.prototype.toString(obj) ###[[value]] 与该对象相关联的内部信息状态 ###[[get]] 返回属性的值 ###[[put]] 将制定的属性设置为 value ###[[canPut]] 是否可以写入相关属性，value ###[[hasProperty]] 返回一个 boolean，对象是否具有给定名称的成员 ###[[delete]] ###[[defaultValue]] 返回与对象相对应的原始值（valueOf()方法被调用） ###[[construct]] 构造一个对象。通过 new 调用。实现这种内部方法的函数是构造函数 ###[[call]]
+指示此对象的种类的字符串值
 
-- 调用者提供的参数值列表。执行与对象相关联的代码。
-- 就理解为 call()方法的前身 ###list type 表达式求值的中间结果 ###completion type 只用于语句评估的中间结果：break continue throw return ###[[get]]算法
+### [[value]]
 
-```
-1. If O doesn't have a property with name P, go to step 4.
-2. Get the value of the property.
-3. Return Result(2).
-4. If the [[Prototype]] of O is null, return undefined.
-5. Call the [[Get]] method of [[Prototype]] with property name P.
-6. Return Result(5).
-```
+与该对象相关联的内部信息状态
+
+### [[get]]
+
+返回属性的值
+
+### [[construct]]
+
+构造一个对象。通过 new 调用。实现这种内部方法的函数是构造函数
 
 ### [[put]]
 
@@ -162,7 +200,9 @@ return F
 
 ### [[defaultValue]]
 
-- When the [[DefaultValue]] method of O is called with hint String, the following steps are taken:
+返回与对象相对应的原始值
+
+- When the [[DefaultValue]] method of O is called with hint String
 
 ```
 1. Call the [[Get]] method of object O with argument "toString".
@@ -176,7 +216,7 @@ return F
 9. Throw a TypeError exception.
 ```
 
-- When the [[DefaultValue]] method of O is called with hint Number, the following steps are taken:
+- When the [[DefaultValue]] method of O is called with hint Number
 
 ```
 1. Call the [[Get]] method of object O with argument "valueOf".
@@ -194,7 +234,7 @@ return F
 
 - GetBase()：Returns the base object component of the reference V.
 - GetPropertyName(V). Returns the property name component of the reference V
-- Getvalue()
+- GetValue()
 
 ```
 1. If Type(V) is not Reference, return V.
