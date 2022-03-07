@@ -5,6 +5,6 @@ hero:
   title: 学习笔记
   desc: 学习笔记
   actions:
-    - text: javascript
-      link: /javascript/reference
+    - text: frontend
+      link: /frontend/reference
 ---

@@ -2,7 +2,7 @@
 title: reference
 order: 0
 nav:
-  title: js
+  title: frontend
   order: 1
 ---
 

@@ -5,7 +5,7 @@ order: 14
 
 ## 浏览器渲染
 
-![](../assets/js/browerRender.png)
+![](../assets/frontend/browerRender.png)
 
 - DOM Tree: HTML 解析成树形的数据结构
 - CSS Rule Tree: CSS 解析成树形的数据结构
@@ -159,7 +159,7 @@ order: 14
 
 ## defer / async
 
-![](../assets/js/scriptType.png)
+![](../assets/frontend/scriptType.png)
 
-- defer: 遇到 defer 的脚本，在后台进行下载，不会阻止文档渲染，当页面解析&渲染完毕后。会等到所有的 defer 脚本加载完毕并按照顺序执行，执行完毕后会触发 DOMContentLoaded 事件 ![](../assets/js/deferScript.png)
-- async: 脚本会在加载完毕后执行。async 脚本的加载不计入 DOMContentLoaded ![](../assets/js/asyncScript.png)
+- defer: 遇到 defer 的脚本，在后台进行下载，不会阻止文档渲染，当页面解析&渲染完毕后。会等到所有的 defer 脚本加载完毕并按照顺序执行，执行完毕后会触发 DOMContentLoaded 事件 ![](../assets/frontend/deferScript.png)
+- async: 脚本会在加载完毕后执行。async 脚本的加载不计入 DOMContentLoaded ![](../assets/frontend/asyncScript.png)
