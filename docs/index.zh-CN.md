@@ -6,5 +6,5 @@ hero:
   desc: 学习笔记
   actions:
     - text: frontend
-      link: /frontend/reference
+      link: /frontend/
 ---
