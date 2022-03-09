@@ -3,22 +3,6 @@ title: dom
 order: 2
 ---
 
-## 浏览器渲染
-
-![](../assets/browser/browerRender.png)
-
-- DOM Tree: HTML 解析成树形的数据结构
-- CSS Rule Tree: CSS 解析成树形的数据结构
-- Render Tree: DOM 和 CSSOM 合并后生成 Render Tree
-- layout: 有了 Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的 CSS 定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置
-- painting: 按照算出来的规则，通过显卡，把内容画到屏幕上
-- reflow: 当浏览器发现某个部分发生了点变化影响了布局，需要倒回去重新渲染
-- repaint: 改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变
-- 注意点
-  - display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会
-  - display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint
-  - 有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow
-
 ## 节点基本
 
 - 文档本身是文档节点
@@ -156,10 +140,3 @@ order: 2
 - element.style 既支持读也支持写，我们通过 element.style 即可改写元素的样式
 - getComputedStyle 读取的样式是最终样式，包括了内联样式、嵌入样式和外部样式
 - getComputedStyle 仅支持读并不支持写入
-
-## defer / async
-
-![](../assets/browser/scriptType.png)
-
-- defer: 遇到 defer 的脚本，在后台进行下载，不会阻止文档渲染，当页面解析&渲染完毕后。会等到所有的 defer 脚本加载完毕并按照顺序执行，执行完毕后会触发 DOMContentLoaded 事件 ![](../assets/browser/deferScript.png)
-- async: 脚本会在加载完毕后执行。async 脚本的加载不计入 DOMContentLoaded ![](../assets/browser/asyncScript.png)
