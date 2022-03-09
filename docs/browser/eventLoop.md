@@ -1,8 +1,8 @@
 ---
 title: eventLoop
-order: 6
+order: 3
 ---
 
-![](../assets/frontend/frameRender.svg)
+![](../assets/browser/frameRender.svg)
 
 ### [参考](https://zhuanlan.zhihu.com/p/33058983)
