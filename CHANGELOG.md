@@ -3,7 +3,7 @@
 ### Features
 
 - **docs:** add bom ([c5caef2](https://github.com/air-supply94/zhouhaifei-study-note/commit/c5caef21a3be405ad196a156d0f1d8034ce30c24))
-- **docs:** add browser ([f0b4b69](https://github.com/air-supply94/zhouhaifei-study-note/commit/f0b4b69742b5a348eb089da67d56a109dc31e794))
+- **docs:** add browser ([67f49cb](https://github.com/air-supply94/zhouhaifei-study-note/commit/67f49cb3976c177956199b6ad89f2cfe9c11f29c))
 - **docs:** add css ([eaf1932](https://github.com/air-supply94/zhouhaifei-study-note/commit/eaf1932bc7b26d2010095e7ed029a56aa671207d))
 - **docs:** add css ([c04a10e](https://github.com/air-supply94/zhouhaifei-study-note/commit/c04a10e293fa0bc292670cc5cd0891f00b35ee92))
 - **docs:** add css ([6ca29ac](https://github.com/air-supply94/zhouhaifei-study-note/commit/6ca29ac093361bed911ab6d86f050e59690bffd3))
