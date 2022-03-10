@@ -1,23 +1,7 @@
 ---
-title: browser
+title: bom
 order: 4
 ---
-
-## 浏览器渲染
-
-![](../assets/browser/browerRender.png)
-
-- DOM Tree: HTML 解析成树形的数据结构
-- CSS Rule Tree: CSS 解析成树形的数据结构
-- Render Tree: DOM 和 CSSOM 合并后生成 Render Tree
-- layout: 有了 Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的 CSS 定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置
-- painting: 按照算出来的规则，通过显卡，把内容画到屏幕上
-- reflow: 当浏览器发现某个部分发生了点变化影响了布局，需要倒回去重新渲染
-- repaint: 改变某个元素的背景色、文字颜色、边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变
-- 注意点
-  - display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会
-  - display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint
-  - 有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow
 
 ## 跨页面通信
 
@@ -97,14 +81,23 @@ otherWindow.postMessage(message, targetOrigin, [transfer]);
 - 仅调用 pushState()或 replaceState(),并不会触发该事件
 - 只有用户点击浏览器倒退按钮和前进按钮,back(),forward(),go()才会触发
 
-## DOM
+## 浏览器架构
 
-### 概念
+![](../assets/browser/browserFrame.png)
 
-- 是生成页面的基础数据结构
-- 提供给 js 脚本操作接口
+- 浏览器进程: 主要负责界面显示、用户交互、子进程管理，同时提供存储等功能
+- 渲染进程: 核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页，排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中，默认情况下，Chrome 会为每个 Tab 标签创建一个渲染进程。运行在沙箱模式下
+- GPU 进程: GPU 的使用初衷是为了实现 3D CSS 的效果，只是随后网页、Chrome 的 UI 界面都选择采用 GPU 来绘制
+- 网络进程: 主要负责页面的网络资源加载
+- 插件进程: 主要是负责插件的运行
 
-### 如何生成
+## 浏览器渲染
+
+![](../assets/browser/browserRender.svg)
+
+### DOM Tree
+
+HTML 解析成树形的数据结构
 
 - 通过分词器将字节流转换为 Token
   - `Tag Token`: `StartTag`和 `EndTag`
@@ -121,3 +114,65 @@ otherWindow.postMessage(message, targetOrigin, [transfer]);
 
 - defer: 遇到 defer 的脚本，在后台进行下载，不会阻止文档渲染，当页面解析&渲染完毕后。会等到所有的 defer 脚本加载完毕并按照顺序执行，执行完毕后会触发 DOMContentLoaded 事件 ![](../assets/browser/deferScript.png)
 - async: 脚本会在加载完毕后执行。async 脚本的加载不计入 DOMContentLoaded ![](../assets/browser/asyncScript.png)
+
+### CSS Tree
+
+CSS 解析成树形的数据结构(document.styleSheets)
+
+### Render Tree
+
+DOM 和 CSSOM 合并后生成 Render Tree
+
+### layout
+
+有了 Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的 CSS 定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置
+
+### [LayerTree](./css/#层叠上下文)
+
+渲染引擎为特定的节点生成专用的图层
+
+### painting
+
+- 会把一个图层的绘制拆分成很多小的绘制指令,然后再把这些指令按照顺序组成一个待绘制列表
+- 绘制列表只是用来记录绘制顺序和绘制指令的列表,当图层的绘制列表准备好之后，主线程会把该绘制列表 commit 给合成线程
+
+### 栅格化 raster
+
+- 合成线程会将图层划分为图块(tile),大小通常是 256x256 或者 512x512
+- 栅格化: 是指将 tile 转换为位图.tile 是栅格化执行的最小单位
+- 然后合成线程会按照视口附近的 tile 来优先生成位图，实际生成位图的操作是由栅格化来执行的
+- 通常，栅格化过程都会使用 GPU 来加速生成，使用 GPU 生成位图的过程叫快速栅格化，或者 GPU 栅格化，生成的位图被保存在 GPU 内存中
+
+### 合成和显示
+
+- 一旦所有图块都被光栅化，合成线程就会生成一个绘制图块的命令`DrawQuad`,然后将该命令提交给浏览器进程
+- 浏览器进程根据 DrawQuad 消息生成页面，并显示到显示器上
+
+### 渲染流程总结
+
+![](../assets/browser/browserRenderProcess.png)
+
+### reflow(重排)
+
+![](../assets/browser/reflow.png)
+
+- 通过 JavaScript 或者 CSS 修改元素的几何位置属性,那么浏览器会触发重新布局
+
+### repaint(重绘)
+
+![](../assets/browser/repaint.png)
+
+- 通过 JavaScript 改变某个元素的背景色、文字颜色、边框颜色等，直接进入 painting,省去了 layout 和 layer tree
+
+### composite
+
+![](../assets/browser/composite.png)
+
+- 渲染引擎将跳过布局和绘制，只执行后续的合成操作，我们把这个过程叫做合成
+- CSS 的 transform 来实现动画效果，这可以避开重排和重绘阶段，直接在非主线程上执行合成动画操作
+
+### 注意点
+
+- display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会
+- display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint
+- 有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow
