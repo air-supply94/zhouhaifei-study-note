@@ -74,12 +74,21 @@ order: 2
 
 ## 事件
 
-### dom2 级
+### EventTarget
 
-- addEventListener(event, function, useCapture)
+- EventTarget.addEventListener(event, function, useCapture)
   - true: 在捕获阶段执行
   - false(默认): 在冒泡阶段执行
-- removeEventListener(event, function)
+- EventTarget.removeEventListener(event, function)
+- EventTarget.dispatchEvent(Event, target): 调用 Event.preventDefault()，则返回值为 false；否则返回 true
+- Event(type, options)
+  - bubbles: 可选，Boolean 类型，默认值为 false
+  - cancelable: 可选，Boolean 类型，默认值为 false
+  - composed: 可选，Boolean 类型，默认值为 false，指示事件是否会在影子 DOM 根节点之外触发侦听器
+- CustomEvent(type, customEventInit)
+  - detail: 可选的默认值是 null 的任意类型数据，是一个与 event 相关的值
+  - bubbles: 一个布尔值，表示该事件能否冒泡。默认不冒泡
+  - cancelable: 一个布尔值，表示该事件是否可以取消
 
 ### 事件对象
 
