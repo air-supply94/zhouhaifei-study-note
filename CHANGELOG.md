@@ -1,7 +1,9 @@
-# 0.0.0 (2022-03-13)
+# 0.0.0 (2022-03-14)
 
 ### Features
 
+- **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
+- **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
 - **docs:** add bom ([c5caef2](https://github.com/air-supply94/zhouhaifei-study-note/commit/c5caef21a3be405ad196a156d0f1d8034ce30c24))
 - **docs:** add browser ([c08efef](https://github.com/air-supply94/zhouhaifei-study-note/commit/c08efef2d6bec3c83fe65e73924128db22d05d50))
 - **docs:** add browser ([67f49cb](https://github.com/air-supply94/zhouhaifei-study-note/commit/67f49cb3976c177956199b6ad89f2cfe9c11f29c))
@@ -12,8 +14,7 @@
 - **docs:** add dom ([52e822d](https://github.com/air-supply94/zhouhaifei-study-note/commit/52e822d518a5723960c472055a1a21254c392333))
 - **docs:** add dom ([14f13f9](https://github.com/air-supply94/zhouhaifei-study-note/commit/14f13f95e61187f7738beb74a6d08777064b2805))
 - **docs:** add event ([ec8ed33](https://github.com/air-supply94/zhouhaifei-study-note/commit/ec8ed330274719f4e05347fe6f0d7a1a7722bc8e))
+- **docs:** add eventLoop ([85a8596](https://github.com/air-supply94/zhouhaifei-study-note/commit/85a8596f7e04e02222e3aeeaa3ba92bd090eee89))
 - **docs:** add String ([ebdc70f](https://github.com/air-supply94/zhouhaifei-study-note/commit/ebdc70f8d6c741d67386aa4e60a33777a4b8eb06))
-- **docs:** add v8 ([808f3d6](https://github.com/air-supply94/zhouhaifei-study-note/commit/808f3d69fc8638e0b1b998381593c6969852d444))
+- **docs:** add v8 ([d157ff7](https://github.com/air-supply94/zhouhaifei-study-note/commit/d157ff75035e9cc031978b5ba541168835edf748))
 - **docs:** rename ([e02c89a](https://github.com/air-supply94/zhouhaifei-study-note/commit/e02c89ab5bc736fead8a049764affe13124e827f))
-- **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
-- **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
