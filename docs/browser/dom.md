@@ -39,7 +39,7 @@ order: 2
 
 - document.createElement(tagName): 创建一个对象并且返回它
 - parentElement.appendChild(node): 将 node 添加到父级的最后,返回这个 node
-- parentElement.insertBefore(node，positionNode): 在位置前添加 node,返回着个 node
+- parentElement.insertBefore(node，positionNode): 在位置前添加 node,返回这个 node
 - parentElement.removeChild(node): 移出 node,返回被移除的 node
 - parentElement.replaceChild(newNode，replaceNode): 用 newNode 在替换 replaceNode,返回 replaceNode
 - node.cloneNode(true): 克隆该 node 和它 children .返回这个克隆出来的对象,不会添加到 dom 树
@@ -47,16 +47,18 @@ order: 2
 ## 属性操作
 
 - setAttribute(key, value)
-- removeAttribute(key, value)
+- removeAttribute(key)
 - getAttribute(key)
 - innerHTML: 包含标签的解析
 - innerText: 文本
-  - 只展示给人看的元素
-  - 受 CSS 样式的影响，并且不会返回隐藏元素的文本
+  - 不返回 display:none 的元素
+  - 获取所有元素的内容，不包括 <script> 和 <style> 元素
+  - 会根据标签里面的元素独立一行
   - 触发 reflow
 - textContent: 文本
+  - 会返回 display:none 的元素
   - 会获取所有元素的内容，包括 <script> 和 <style> 元素
-  - 会返回节点中的每一个元素
+  - 不会理会 html 格式，直接输出不换行的文本
 - dataset.property(getter, setter)
 
 ## 元素宽高

@@ -119,13 +119,24 @@ HTML 解析成树形的数据结构
 
 CSS 解析成树形的数据结构(document.styleSheets)
 
+- 提供给 JavaScript 操作样式表的能力
+- 为布局树的合成提供基础的样式信息
+
 ### Render Tree
 
 DOM 和 CSSOM 合并后生成 Render Tree
 
+- display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会
+- display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint
+- 有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow
+- 不包含 head 标签、script 标签
+
 ### layout
 
 有了 Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的 CSS 定义以及他们的从属关系，从而去计算出每个节点在屏幕中的位置
+
+- 样式计算: 为对应的 DOM 元素选择对应的样式信息
+- 计算布局: 计算布局树中每个元素对应的几何位置
 
 ### [LayerTree](./css/#层叠上下文)
 
@@ -142,6 +153,7 @@ DOM 和 CSSOM 合并后生成 Render Tree
 - 栅格化: 是指将 tile 转换为位图.tile 是栅格化执行的最小单位
 - 然后合成线程会按照视口附近的 tile 来优先生成位图，实际生成位图的操作是由栅格化来执行的
 - 通常，栅格化过程都会使用 GPU 来加速生成，使用 GPU 生成位图的过程叫快速栅格化，或者 GPU 栅格化，生成的位图被保存在 GPU 内存中
+- 在首次合成图块的时候使用一个低分辨率的图片。当正常比例的网页内容绘制完成后，再替换掉当前显示的低分辨率内容
 
 ### 合成和显示
 
@@ -168,11 +180,41 @@ DOM 和 CSSOM 合并后生成 Render Tree
 
 ![](../assets/browser/composite.png)
 
-- 渲染引擎将跳过布局和绘制，只执行后续的合成操作，我们把这个过程叫做合成
+- 渲染引擎将跳过布局和绘制，只执行后续的合成操作
 - CSS 的 transform 来实现动画效果，这可以避开重排和重绘阶段，直接在非主线程上执行合成动画操作
 
-### 注意点
+## cookie
 
-- display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会
-- display:none 会触发 reflow，而 visibility:hidden 只会触发 repaint
-- 有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow
+### Set-Cookie
+
+Set-Cookie: <cookie 名>=<cookie 值>
+
+### Cookie 请求头
+
+Cookie: key=value;
+
+### 过期时间
+
+- Expires=GMT 格式(毫秒)
+- Max-Age=秒(优先)
+
+### 安全
+
+- Secure: 只应通过被 HTTPS 协议加密过的请求发送给服务端
+- HttpOnly: document.cookie 无法访问
+
+### Domain
+
+指定了哪些主机可以接受 Cookie。如果不指定，默认为 origin，不包含子域名
+
+### Path
+
+指定了主机下的哪些路径可以接受 Cookie
+
+### SameSite
+
+允许服务器要求某个 cookie 在跨站请求时不会被发送
+
+- None: 浏览器会在同站请求、跨站请求下继续发送 cookies，不区分大小写。
+- Strict: 浏览器将只在访问相同站点时发送 cookie。（在原有 Cookies 的限制条件上的加强，如上文 “Cookie 的作用域” 所述）
+- Lax: 与 Strict 类似，但用户从外部站点导航至 URL 时（例如通过链接）除外(默认)
