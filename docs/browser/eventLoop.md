@@ -58,6 +58,35 @@ V8 在创建全局执行上下文的同时,也会在内部创建一个微任务�
 - 使用 MutationObserver 监控某个 DOM 节点，然后再通过 JavaScript 来修改这个节点，或者为这个节点添加、删除部分子节点，当 DOM 节点发生变化时
 - 使用 Promise，当调用 Promise.resolve() 或者 Promise.reject() 时
 
+```js
+// 选择需要观察变动的节点
+const targetNode = document.getElementById('some-id');
+
+// 观察器的配置（需要观察什么变动）
+const config = { attributes: true, childList: true, subtree: true };
+
+// 当观察到变动时执行的回调函数
+const callback = function (mutationsList, observer) {
+  // Use traditional 'for loops' for IE 11
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      console.log('A child node has been added or removed.');
+    } else if (mutation.type === 'attributes') {
+      console.log('The ' + mutation.attributeName + ' attribute was modified.');
+    }
+  }
+};
+
+// 创建一个观察器实例并传入回调函数
+const observer = new MutationObserver(callback);
+
+// 以上述配置开始观察目标节点
+observer.observe(targetNode, config);
+
+// 之后，可停止观察
+observer.disconnect();
+```
+
 ### 何时执行
 
 - 在当前宏任务中的 JavaScript 快执行完成时,会检查全局执行上下文中的微任务队列，然后按照顺序执行队列中的微任务
