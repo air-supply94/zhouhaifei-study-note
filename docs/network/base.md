@@ -42,9 +42,9 @@ order: 1
 一个硬体或软体用来连接不同的网路区段(segment)的设备---`数据链路层`
 
 - 它们仅属于同一网路之内的两个区段,只要上层的传输协定是一致的，那 bridge 就能让不同的硬体 segment 沟通
-- Discovery ﹐就是 bridge 的任意一端是否有资料到达
-- Filtering ﹐接着 bridbe 过滤(filter)资料，并决定是否需要传送到另一端
-- Forwarding ﹐然后 bridge 将资料传送(forward)给目的端位址，若使用的格式不一致，则同时进行转换
+- Discovery: bridge 的任意一端是否有资料到达
+- Filtering: bridge 过滤(filter)资料，并决定是否需要传送到另一端
+- Forwarding: bridge 将资料传送(forward)给目的端位址，若使用的格式不一致，则同时进行转换
 
 ### 交换机（switch）
 
@@ -56,7 +56,7 @@ order: 1
 
 - 传输协定本身的沟通，连接各自独立的网路
 - hop: 封包从一个 router 传到另一个 router 的过程
-- `封包的逻辑位址(来源跟目的)`
+- `封包的逻辑位址(来源和目的)`
 - `硬体位址(来源和目的)`
 
 ### 网关（Gateway）
