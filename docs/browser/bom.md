@@ -3,47 +3,6 @@ title: bom
 order: 4
 ---
 
-## 跨页面通信
-
-### url
-
-### localStorage
-
-### message
-
-```js
-window.addEventListener('message', function (event) {
-  //event.source: 消息源，消息的发送窗口/iframe
-  //event.origin: 消息源的 URI(可能包含协议、域名和端口)，用来验证数据源。
-  //event.data: 发送过来的数据
-});
-```
-
-### postMessage
-
-otherWindow.postMessage(message, targetOrigin, [transfer]);
-
-- otherWindow: 其他窗口的一个引用，比如 iframe 的 contentWindow 属性、执行 window.open 返回的窗口对象、或者是命名过或数值索引的 window.frames
-- `message`: 数据
-- `targetOrigin`: 指定哪些窗口能接收到消息事件，其值可以是 \*（表示无限制）或者一个 URI。
-
-### iframe
-
-能自由操作 iframe 和父框架的内容(DOM)的前提条件是同域
-
-- `height / width`
-- `marginheight`: 顶部和底部的空白边距.`marginwidth`
-- `name`: 用于在 js 中引用元素，或者作为链接的目标
-- scrolling
-  - auto: 在需要的情况下出现滚动条.`默认`
-  - yes: 始终显示滚动条(即使不需要) no: 从不显示滚动条(即使需要)
-- `src`
-- `iframe.contentWindow`: 获取 iframe 的 window 对象
-- `iframe.contentDocument`: 获取 iframe 的 document 对象
-- `window.parent`: 获取上一级的 window 对象，如果还是 iframe 则是该 iframe 的 window 对象
-- `window.top`: 获取最顶级容器的 window 对象，即打开页面的文档
-- `window.self`: 返回自身 window 的引用，可以理解为 window===window.self
-
 ## 前端路由
 
 ### hash
@@ -213,8 +172,8 @@ Cookie: key=value;
 
 ### SameSite
 
-允许服务器要求某个 cookie 在跨站请求时不会被发送
+服务器要求某个 cookie 在跨站请求时发送方案
 
 - None: 浏览器会在同站请求、跨站请求下继续发送 cookies，不区分大小写。
-- Strict: 浏览器将只在访问相同站点时发送 cookie。（在原有 Cookies 的限制条件上的加强，如上文 “Cookie 的作用域” 所述）
-- Lax: 与 Strict 类似，但用户从外部站点导航至 URL 时（例如通过链接）除外(默认)
+- Strict: 浏览器将只在访问相同站点时发送 cookie
+- Lax: 在跨站点的情况下,从第三方站点的链接打开和从第三方站点提交 Get 方式的表单这两种方式都会携带 Cookie
