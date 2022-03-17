@@ -3,79 +3,80 @@ title: performance
 order: 6
 ---
 
-## 性能指标
-
-### DOMContentLoaded
+## DOMContentLoaded
 
 构建 DOM 所需要的 HTML 文件、JavaScript 文件、CSS 文件都已经下载完成了
 
-### Load
+## Load
 
 已经加载了所有的资源(图像、样式表等)
 
-### Queuing
+## Queuing
 
-当浏览器发起一个请求的时候，会有很多原因导致该请求不能被立即执行，而是需要排队等待
-
+- 当浏览器发起一个请求的时候，会有很多原因导致该请求不能被立即执行，而是需要排队等待
 - 排队时间过久，大概率是由浏览器为每个域名最多维护 6 个连接导致的
 - 开启 http2
 
-### TTFB
+## CLS
 
-第一字节时间
+Cumulative Layout Shift 累积布局偏移
+
+### 概念
+
+测量整个页面生命周期内发生的所有意外布局偏移中最大一连串的布局偏移分数
+
+### 目标
+
+分数控制在 0.1 以内
+
+## FCP
+
+First Contentful Paint 首次内容绘制
+
+### 概念
+
+指标测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.包含文本、图像、svg 元素、非白色 canvas
+
+### 目标
+
+1.8s 以内
+
+## LCP
+
+Largest Contentful Paint 最大内容绘制
+
+### 概念
+
+根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
+
+### 目标
+
+控制在 2.5 秒以内
+
+## FID
+
+First Input Delay 首次输入延迟
+
+### 概念
+
+测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应，并实际能够开始处理事件处理程序所经过的时间
+
+### 目标
+
+控制在 100 毫秒以内
+
+## TTFB
+
+### 概念
+
+Time to First Byte,即用户浏览器接收页面内容的第一个字节所需的时间
+
+### 临界点
+
+600 毫秒
+
+### 可能原因
 
 - 服务器生成页面数据的时间过久
-- 网络的原因
+- 网络
 - 发送请求头时带上了多余的用户信息
-
-### 白屏
-
-提交数据之后渲染进程会创建一个空白页面，并等待 CSS 文件和 JavaScript 文件的加载完成，生成 CSSOM 和 DOM，然后合成布局树，最后还要经过一系列的步骤准备首次渲染
-
-## 性能优化
-
-### 加载阶段
-
-- 关键资源个数
-- 关键资源大小
-- 请求关键资源需要多少个 RTT
-
-### 交互阶段
-
-- 减少 JavaScript 脚本执行时间
-  - 将一次执行的函数分解为多个任务，使得每次的执行时间不要过久
-  - 采用 Web Workers
-- 避免强制同步布局： JavaScript 强制将计算样式和布局操作提前到当前的任务中
-
-```js
-function foo() {
-  let main_div = document.getElementById('mian_div');
-  let new_node = document.createElement('li');
-  let textnode = document.createTextNode('time.geekbang');
-  new_node.appendChild(textnode);
-  document.getElementById('mian_div').appendChild(new_node);
-  // 由于要获取到 offsetHeight，
-  // 但是此时的 offsetHeight 还是老的数据，
-  // 所以需要立即执行布局操作
-  console.log(main_div.offsetHeight);
-}
-```
-
-- 避免布局抖动: 是指在一次 JavaScript 执行过程中，多次执行强制布局和抖动操作
-
-```js
-function foo() {
-  let time_li = document.getElementById('time_li');
-  for (let i = 0; i < 100; i++) {
-    let main_div = document.getElementById('mian_div');
-    let new_node = document.createElement('li');
-    let textnode = document.createTextNode('time.geekbang');
-    new_node.appendChild(textnode);
-    new_node.offsetHeight = time_li.offsetHeight;
-    document.getElementById('mian_div').appendChild(new_node);
-  }
-}
-```
-
-- 合理利用 CSS 合成动画(合成线程)
-- 避免频繁的垃圾回收
