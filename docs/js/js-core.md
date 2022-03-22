@@ -1,6 +1,6 @@
 ---
 title: js-core
-order: 15
+order: 14
 ---
 
 ### 标识符

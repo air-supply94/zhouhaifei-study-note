@@ -1,6 +1,9 @@
 ---
 title: babel
-order: 14
+order: 1
+nav:
+  title: frame
+  order: 1
 ---
 
 ## 参考
@@ -84,11 +87,11 @@ order: 14
 
 ## 处理流程
 
-![](../assets/js/babelProcess.png)
+![](../assets/frame/babelProcess.png)
 
 ## 架构
 
-![](../assets/js/babelArch.png)
+![](../assets/frame/babelArch.png)
 
 ### @babel/core
 
