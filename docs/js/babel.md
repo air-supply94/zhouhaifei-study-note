@@ -3,7 +3,84 @@ title: babel
 order: 14
 ---
 
-## [参考](https://bobi.ink/2019/10/01/babel/)
+## 参考
+
+- [官方](https://babeljs.io/blog/)
+- [原理](https://bobi.ink/2019/10/01/babel/)
+- [兼容性方案](https://juejin.cn/post/6976501655302832159)
+
+## 配置
+
+### stage-x
+
+指处于某一阶段的 js 语言提案
+
+- Stage 0 设想: 只是一个想法，可能有 Babel 插件
+- Stage 1 建议 Proposal:这是值得跟进的
+- Stage 2 草案 Draft: 初始规范
+- Stage 3 候选 Candidate: 完成规范并在浏览器上初步实现
+- Stage 4 完成 Finished: 将添加到下一个年度版本发布中
+
+### core-js
+
+和 babel 高度集成,是 babel 解决新特性在浏览器中兼容问题的核心依赖
+
+### core-js@2
+
+- `不用太关心此包和@babel/polyfill`
+- library 模块: 不污染全局的 runtime 模块,供@babel/runtime-corejs2 引入
+- modules 模块: 污染全局的 polyfill 模块,供@babel/polyfill 和@babel/preset-env 引入
+
+### core-js@3
+
+放弃了对@babel/polyfill 的支持，被@babel/preset-env 和@babel/runtime-corejs3 引入来进行新 api 的兼容处理
+
+- core-js: 污染全局的 polyfill 包，供@babel/preset-env 使用
+- core-js-pure: 不污染全局的 runtime 包，供@babel/runtime-corejs3 使用
+
+### @babel/preset-env
+
+- 预设置一组插件来便捷转换那些已经被正式纳入 TC39 中的语法
+- 依赖 core-js 在全局和构造函数静态属性、实例属性上添加 api 的方式来解决 api 兼容性问题
+
+```json
+{
+  "modules": false,
+  "useBuiltIns": "usage",
+  "corejs": {
+    "version": 3,
+    "proposals": true
+  }
+}
+```
+
+### runtime
+
+核心思想是以引入替换的方式来解决兼容性问题
+
+- 依赖 helpers、regenerator-runtime 模块来实现语法的替换
+- helpers 中提供了一些语法模拟的函数
+- regenerator-runtime 中实现了 async/await 语法的转换
+- @babel/runtime: 只能处理语法替换
+- @babel/runtime-corejs2: `不用特别关心`
+- @babel/runtime-corejs3
+  - 支持全局构造函数和静态方法兼容
+  - 支持了实例方法的兼容,同时还支持对 ECMAScript 提案的 api 进行模拟
+
+### @babel/plugin-transform-runtime
+
+- 就是为了方便@babel/runtime 的使用
+
+```json
+{
+  "corejs": 3,
+  "proposals": true
+}
+```
+
+### 解决方案
+
+- `@babel/preset-env` + `@babel/runtime-corejs3` + `@babel/plugin-transform-runtime`
 
 ## 处理流程
 
