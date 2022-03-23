@@ -22,7 +22,7 @@ order: 7
 - DNS 预加载
 
 ```html
-<link rel="dns-prefetch" href="http://www.xuanfengge.com/" />
+<link rel="dns-prefetch" href="www.domain.com/" />
 ```
 
 ### TCP 网络
@@ -74,6 +74,11 @@ order: 7
   - babel 下@babel/preset-env 下 modules: false
   - sideEffects
 - gzip 压缩(compression-webpack-plugin)
+- IgnorePlugin
+- thread-loader
+- Resolve
+  - modules
+  - extensions
 - 合理配置浏览器兼容
 - 路由懒加载
 - 动态引入组件,第三方包
@@ -88,6 +93,7 @@ order: 7
 - loader 的 include 和 exclude
 - 样式文件 dev 开启 style-loader 热更新
 - cache: filesystem
+- babel-loader+ @babel/preset-typescript + ForkTsCheckerWebpackPlugin
 
 ## React
 

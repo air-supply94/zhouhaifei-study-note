@@ -90,3 +90,31 @@ class HelloWorldPlugin {
 
 module.exports = HelloWorldPlugin;
 ```
+
+## Compiler Hooks
+
+### 初始化阶段
+
+- environment、afterEnvironment: 在创建完 compiler 实例且执行了配置内定义的插件的 apply 方法后触发
+- entryOption、afterPlugins、afterResolvers: 在执行 EntryOptions 插件和其他 Webpack 内置插件,以及解析了 resolver 配置后触发
+
+### 构建过程阶段
+
+- normalModuleFactory、contextModuleFactory: 在两类模块工厂创建后触发
+- beforeRun、run、watchRun、beforeCompile、compile、thisCompilation、compilation、make、afterCompile: 在运行构建过程中触发
+
+### 产物生成阶段
+
+- shouldEmit、emit、assetEmitted、afterEmit: 在构建完成后,处理产物的过程中触发
+- failed、done: 在达到最终结果状态时触发
+
+## Compilation Hooks
+
+### 构建阶段
+
+- buildModule、rebuildModule、finishRebuildingModule、failedModule、succeedModule: 在构建单个模块时触发
+- finishModules: 在所有模块构建完成后触发
+
+### 优化阶段
+
+![](../assets/frame/compilationOptimization.png)
