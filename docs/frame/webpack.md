@@ -32,6 +32,32 @@ order: 2
 - 开发环境: `eval-cheap-module-source-map`
 - 生产环境: `source-map`
 
+## 插件
+
+一个包含 apply 方法的 JavaScript 对象。这个 apply 方法的执行逻辑，通常是注册 Webpack 工作流程中某一生命周期 Hook,并添加对应 Hook 中该插件的实际处理函数
+
+```js
+class HelloWorldPlugin {
+  apply(compiler) {
+    compiler.hooks.run.tap('HelloWorldPlugin', (compilation) => {
+      console.log('hello world');
+    });
+  }
+}
+
+module.exports = HelloWorldPlugin;
+```
+
+## loader
+
+用来加载处理各种形式的资源,本质上是一个函数, 接受文件作为参数,返回转化后的结构
+
+```js
+module.exports = function (source) {
+  return `export default ${JSON.stringify(source)}`;
+};
+```
+
 ## 构建流程
 
 ### 基本流程
@@ -74,22 +100,6 @@ const webpack = (options, callback) => {
 ### 生命周期
 
 Compiler 和 Compilation 都扩展自 Tapable 类,用于实现工作流程中的生命周期划分,以便在不同的生命周期节点上注册和调用插件。其中所暴露出来的生命周期节点称为 Hook
-
-### 插件
-
-一个包含 apply 方法的 JavaScript 对象。这个 apply 方法的执行逻辑，通常是注册 Webpack 工作流程中某一生命周期 Hook,并添加对应 Hook 中该插件的实际处理函数
-
-```js
-class HelloWorldPlugin {
-  apply(compiler) {
-    compiler.hooks.run.tap('HelloWorldPlugin', (compilation) => {
-      console.log('hello world');
-    });
-  }
-}
-
-module.exports = HelloWorldPlugin;
-```
 
 ## Compiler Hooks
 

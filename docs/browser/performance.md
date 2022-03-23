@@ -80,3 +80,28 @@ Time to First Byte,即用户浏览器接收页面内容的第一个字节所需�
 - 服务器生成页面数据的时间过久
 - 网络
 - 发送请求头时带上了多余的用户信息
+
+## performance.timing
+
+### 说明
+
+- connectStart 和 connectEnd: TCP 建立连接和连接成功的时间节点
+- domComplete: html 文档完全解析完毕的时间节点
+- domContentLoadedEventStart 和 domContentLoadedEventEnd
+- domInteractive: 解析 html 文档的状态为 interactive 时的时间节点
+- domLoading: 开始解析 html 文档的时间节点
+- domainLookupStart 和 domainLookupEnd
+- fetchStart: 是指在浏览器发起任何请求之前的时间值
+- loadEventStart 和 loadEventEnd: onload 事件触发和结束的时间节点
+- redirectStart 和 redirectEnd
+- responseStart 和 responseEnd
+
+### 主要指标
+
+- DNS 查询耗时 = domainLookupEnd - domainLookupStart
+- TCP 链接耗时 = connectEnd - connectStart
+- request 请求耗时 = responseEnd - responseStart
+- 解析 dom 树耗时 = domComplete - domInteractive
+- 白屏时间 = domLoading - fetchStart
+- domReady 时间 = domContentLoadedEventEnd - fetchStart
+- onload 时间 = loadEventEnd - fetchStart
