@@ -1,4 +1,4 @@
-# 0.0.0 (2022-03-24)
+# 0.0.0 (2022-03-25)
 
 ### Features
 
@@ -11,6 +11,7 @@
 - **docs:** add css ([c04a10e](https://github.com/air-supply94/zhouhaifei-study-note/commit/c04a10e293fa0bc292670cc5cd0891f00b35ee92))
 - **docs:** add css ([6ca29ac](https://github.com/air-supply94/zhouhaifei-study-note/commit/6ca29ac093361bed911ab6d86f050e59690bffd3))
 - **docs:** add decorator ([8235d99](https://github.com/air-supply94/zhouhaifei-study-note/commit/8235d99cd635250eb29745d6874664335128ccea))
+- **docs:** add designPattern.md ([7c51254](https://github.com/air-supply94/zhouhaifei-study-note/commit/7c51254ef3a04d818c2672bab696e6dcffcda99c))
 - **docs:** add dom ([52e822d](https://github.com/air-supply94/zhouhaifei-study-note/commit/52e822d518a5723960c472055a1a21254c392333))
 - **docs:** add dom ([14f13f9](https://github.com/air-supply94/zhouhaifei-study-note/commit/14f13f95e61187f7738beb74a6d08777064b2805))
 - **docs:** add event ([ec8ed33](https://github.com/air-supply94/zhouhaifei-study-note/commit/ec8ed330274719f4e05347fe6f0d7a1a7722bc8e))
@@ -23,6 +24,7 @@
 - **docs:** add String ([ebdc70f](https://github.com/air-supply94/zhouhaifei-study-note/commit/ebdc70f8d6c741d67386aa4e60a33777a4b8eb06))
 - **docs:** add v8 ([cac5c8a](https://github.com/air-supply94/zhouhaifei-study-note/commit/cac5c8a10707e54a1897107652f001a2be06b221))
 - **docs:** add v8 ([d157ff7](https://github.com/air-supply94/zhouhaifei-study-note/commit/d157ff75035e9cc031978b5ba541168835edf748))
+- **docs:** add virtualDom.md ([2352039](https://github.com/air-supply94/zhouhaifei-study-note/commit/23520399f6a08377229d921a687f25717476166f))
 - **docs:** add webpack.md ([8148775](https://github.com/air-supply94/zhouhaifei-study-note/commit/814877565024c5b581d1957020f25779041b9cb6))
 - **docs:** add webpack.md ([1f47076](https://github.com/air-supply94/zhouhaifei-study-note/commit/1f470762ff2ff555d8e619681de54cb3efc5e3c6))
 - **docs:** add webpack.md ([0c02144](https://github.com/air-supply94/zhouhaifei-study-note/commit/0c02144695b4e047038c62c6ef13f401f5e3ecdf))
