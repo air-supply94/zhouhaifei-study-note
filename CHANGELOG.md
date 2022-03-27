@@ -1,4 +1,4 @@
-# 0.0.0 (2022-03-25)
+# 0.0.0 (2022-03-27)
 
 ### Features
 
@@ -10,8 +10,9 @@
 - **docs:** add css ([eaf1932](https://github.com/air-supply94/zhouhaifei-study-note/commit/eaf1932bc7b26d2010095e7ed029a56aa671207d))
 - **docs:** add css ([c04a10e](https://github.com/air-supply94/zhouhaifei-study-note/commit/c04a10e293fa0bc292670cc5cd0891f00b35ee92))
 - **docs:** add css ([6ca29ac](https://github.com/air-supply94/zhouhaifei-study-note/commit/6ca29ac093361bed911ab6d86f050e59690bffd3))
+- **docs:** add debounce.md and throttle.md ([867ed6d](https://github.com/air-supply94/zhouhaifei-study-note/commit/867ed6dd3c91a65b47ac33e2ea1afdcf9b2e2c0f))
 - **docs:** add decorator ([8235d99](https://github.com/air-supply94/zhouhaifei-study-note/commit/8235d99cd635250eb29745d6874664335128ccea))
-- **docs:** add designPattern.md ([7c51254](https://github.com/air-supply94/zhouhaifei-study-note/commit/7c51254ef3a04d818c2672bab696e6dcffcda99c))
+- **docs:** add designPattern.md ([4026d60](https://github.com/air-supply94/zhouhaifei-study-note/commit/4026d60f41cb5b528571f9b81e7140c643ae5d72))
 - **docs:** add dom ([52e822d](https://github.com/air-supply94/zhouhaifei-study-note/commit/52e822d518a5723960c472055a1a21254c392333))
 - **docs:** add dom ([14f13f9](https://github.com/air-supply94/zhouhaifei-study-note/commit/14f13f95e61187f7738beb74a6d08777064b2805))
 - **docs:** add event ([ec8ed33](https://github.com/air-supply94/zhouhaifei-study-note/commit/ec8ed330274719f4e05347fe6f0d7a1a7722bc8e))
