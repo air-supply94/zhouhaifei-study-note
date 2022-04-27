@@ -1,13 +1,15 @@
-# 0.0.0 (2022-04-24)
+# 0.0.0 (2022-04-27)
 
 ### Features
 
+- **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
+- **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
 - **docs:** add babel.md ([1e89996](https://github.com/air-supply94/zhouhaifei-study-note/commit/1e8999628e8896e2e4c446af931018381c609982))
 - **docs:** add babel.md ([8bc3844](https://github.com/air-supply94/zhouhaifei-study-note/commit/8bc384485c69efc8fbc1988fcf8f2883958bafac))
 - **docs:** add bom ([c5caef2](https://github.com/air-supply94/zhouhaifei-study-note/commit/c5caef21a3be405ad196a156d0f1d8034ce30c24))
 - **docs:** add browser ([c08efef](https://github.com/air-supply94/zhouhaifei-study-note/commit/c08efef2d6bec3c83fe65e73924128db22d05d50))
 - **docs:** add browser ([67f49cb](https://github.com/air-supply94/zhouhaifei-study-note/commit/67f49cb3976c177956199b6ad89f2cfe9c11f29c))
-- **docs:** add csapp.md ([c18c6da](https://github.com/air-supply94/zhouhaifei-study-note/commit/c18c6daac13516dbde69c5a3fc15370a5719d99e))
+- **docs:** add csapp.md ([531fc19](https://github.com/air-supply94/zhouhaifei-study-note/commit/531fc19d1a858683bfa8aede7a5b4198f25eec2e))
 - **docs:** add css ([eaf1932](https://github.com/air-supply94/zhouhaifei-study-note/commit/eaf1932bc7b26d2010095e7ed029a56aa671207d))
 - **docs:** add css ([c04a10e](https://github.com/air-supply94/zhouhaifei-study-note/commit/c04a10e293fa0bc292670cc5cd0891f00b35ee92))
 - **docs:** add css ([6ca29ac](https://github.com/air-supply94/zhouhaifei-study-note/commit/6ca29ac093361bed911ab6d86f050e59690bffd3))
@@ -33,5 +35,4 @@
 - **docs:** add webpack.md ([0c02144](https://github.com/air-supply94/zhouhaifei-study-note/commit/0c02144695b4e047038c62c6ef13f401f5e3ecdf))
 - **docs:** rename ([e02c89a](https://github.com/air-supply94/zhouhaifei-study-note/commit/e02c89ab5bc736fead8a049764affe13124e827f))
 - **docs:** update network ([dfea3de](https://github.com/air-supply94/zhouhaifei-study-note/commit/dfea3de23a60d76158091d18c7c213534bda69d4))
-- **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
-- **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
+- **js:** 更新 bind 实现 ([8d74d2b](https://github.com/air-supply94/zhouhaifei-study-note/commit/8d74d2b970146fe5068c4ab0ac37b3b8bf4f2302))
