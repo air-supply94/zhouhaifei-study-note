@@ -65,29 +65,32 @@ order: 7
 
 ## webpack 优化
 
-- html 文件压缩(html-webpack-plugin)
+### 用户性能
+
 - 资源 prefetch(preload-webpack-plugin)
+- contentHash
+- html 文件压缩(html-webpack-plugin)
 - css 文件压缩(css-minimizer-webpack-plugin)
 - js 文件压缩(terser-webpack-plugin)
+- gzip 压缩(compression-webpack-plugin)
+- 浏览器兼容(polyfill)
+- 路由懒加载
+- 按需引入和合理配置 splitChunks
+- external
 - tree shaking
   - es6 模块
   - babel 下@babel/preset-env 下 modules: false
   - sideEffects
-- gzip 压缩(compression-webpack-plugin)
-- IgnorePlugin
+- moduleIds: 'deterministic'
+- runtimeChunk: 'single'
+
+### 打包流程
+
 - thread-loader
 - Resolve
   - modules
   - extensions
-- 合理配置浏览器兼容
-- 路由懒加载
-- 动态引入组件,第三方包
-- external
 - alias
-- moduleIds: 'deterministic'
-- runtimeChunk: 'single'
-- 合理配置 splitChunks
-- contentHash
 - sourceMap 方式
 - webpack5 的 asset,asset/resource
 - loader 的 include 和 exclude

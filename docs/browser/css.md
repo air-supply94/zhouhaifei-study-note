@@ -233,7 +233,6 @@ order: 1
 span、a、label、i、strong、b
 
 - 行内元素不会独占一行，相邻的行内元素会排列在同一行里，直到一行排不下，才会换行，其宽度随元素的内容而变化
-- 行内元素设置 width, height
 - 行内元素只能设置水平 margin 和 padding
 
 ## 块级元素

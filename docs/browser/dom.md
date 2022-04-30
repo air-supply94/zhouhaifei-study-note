@@ -52,12 +52,12 @@ order: 2
 - innerHTML: 包含标签的解析
 - innerText: 文本
   - 不返回 display:none 的元素
-  - 获取所有元素的内容，不包括 <script> 和 <style> 元素
+  - 获取所有元素的内容，不包括 \<script> 和 \<style> 元素
   - 会根据标签里面的元素独立一行
   - 触发 reflow
 - textContent: 文本
   - 会返回 display:none 的元素
-  - 会获取所有元素的内容，包括 <script> 和 <style> 元素
+  - 会获取所有元素的内容，包括 \<script> 和 \<style> 元素
   - 不会理会 html 格式，直接输出不换行的文本
 - dataset.property(getter, setter)
 
@@ -74,10 +74,6 @@ order: 2
 - 文档滚动距离: window.pageXOffset / window.pageYOffset
 - 父级第一个有定位: element.offsetLeft / element.offsetTop
 - 滚动条: scrollLeft / scrollTop
-- 事件坐标
-  - 视口: e.clientX / e.clientY
-  - 文档: e.pageX / e.pageY
-  - 事件源(padding): e.offsetX / e.offsetY
 
 ## 事件
 
@@ -102,6 +98,10 @@ order: 2
 - metaKey
 - e.key
 - `e.keyCode`
+- `e.clientX`和`e.clientY`
+- `e.pageX`和`e.pageY`
+- `e.offsetX`和`e.offsetY`。事件源(padding)
+
 - e.ctrlKey
 - e.shiftKey
 - e.altKey
@@ -110,7 +110,7 @@ order: 2
 - `target`: 触发事件 node
 - `currentTarget`: 事件绑定 node
 - `preventDefault()`
-- `stopImmediatePropagation()`: 取消事件的进一步捕获或冒泡，同时阻止任何处理程序被调用
+- `stopImmediatePropagation()`: 阻止事件冒泡并且阻止该元素上同事件类型的监听器被触发
 - `stopPropagation()`: 阻止冒泡
 - type: 触发事件的类型
 
