@@ -1,4 +1,4 @@
-# 0.0.0 (2022-05-03)
+# 0.0.0 (2022-05-04)
 
 ### Features
 
@@ -35,3 +35,4 @@
 - **docs:** update network ([dfea3de](https://github.com/air-supply94/zhouhaifei-study-note/commit/dfea3de23a60d76158091d18c7c213534bda69d4))
 - **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
 - **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
+- **js:** 更新 bind 实现 ([52d708a](https://github.com/air-supply94/zhouhaifei-study-note/commit/52d708a727612ed412e1b1e3372d28039d49944d))
