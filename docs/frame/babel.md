@@ -18,7 +18,7 @@ nav:
 
 指处于某一阶段的 js 语言提案
 
-- Stage 0 设想: 只是一个想法，可能有 Babel 插件
+- Stage 0 设想: 只是一个想法,可能有 Babel 插件
 - Stage 1 建议 Proposal:这是值得跟进的
 - Stage 2 草案 Draft: 初始规范
 - Stage 3 候选 Candidate: 完成规范并在浏览器上初步实现
@@ -36,10 +36,10 @@ nav:
 
 ### core-js@3
 
-放弃了对@babel/polyfill 的支持，被@babel/preset-env 和@babel/runtime-corejs3 引入来进行新 api 的兼容处理
+放弃了对@babel/polyfill 的支持,被@babel/preset-env 和@babel/runtime-corejs3 引入来进行新 api 的兼容处理
 
-- core-js: 污染全局的 polyfill 包，供@babel/preset-env 使用
-- core-js-pure: 不污染全局的 runtime 包，供@babel/runtime-corejs3 使用
+- core-js: 污染全局的 polyfill 包,供@babel/preset-env 使用
+- core-js-pure: 不污染全局的 runtime 包,供@babel/runtime-corejs3 使用
 
 ### @babel/preset-env
 
@@ -114,7 +114,7 @@ nav:
 - @babel/plugin-syntax-\*: @babel/parser 已经支持了很多 JavaScript 语法特性,实际上只是用于开启或者配置 Parser 的某个功能特性
 - @babel/plugin-transform-\*: 普通的转换插件
 - @babel/plugin-proposal-\*: 还在提议阶段(非正式)的语言特性
-- @babel/presets-\*: 插件集合或者分组,主要方便用户对插件进行管理和使用。preset-env,preset-react
+- @babel/presets-\*: 插件集合或者分组,主要方便用户对插件进行管理和使用.preset-env,preset-react
 
 ### 插件开发辅助
 
@@ -126,7 +126,7 @@ nav:
 ### 工具
 
 - @babel/node: Node.js CLI, 通过它直接运行需要 Babel 处理的 JavaScript 文件
-- @babel/register: Patch NodeJs 的 require 方法，支持导入需要 Babel 处理的 JavaScript 模块
+- @babel/register: Patch NodeJs 的 require 方法,支持导入需要 Babel 处理的 JavaScript 模块
 - @babel/cli: CLI 工具
 
 ## 访问者模式
@@ -198,7 +198,7 @@ export class NodePath<T = Node> {
   parentPath: NodePath;
   context: TraversalContext;
   container: object | object[];
-  listKey: string; // 如果节点在一个数组中，这个就是节点数组的键
+  listKey: string; // 如果节点在一个数组中,这个就是节点数组的键
   inList: boolean;
   parentKey: string;
   key: string | number; // 节点所在的键或索引

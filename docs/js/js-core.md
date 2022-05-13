@@ -9,7 +9,7 @@ order: 99
 
 ### EC
 
-- 只有一个全局上下文，每次调用一个函数都进入执行上下文评估代码类型
+- 只有一个全局上下文,每次调用一个函数都进入执行上下文评估代码类型
 - Stack
 - 处理上下文阶段
   - enter execution Context
@@ -18,12 +18,12 @@ order: 99
 ### VO
 
 - 函数声明、变量声明、函数形参
-- global variable: 在任何 EC 前创建的对象，其属性可以在程序的任何位置引用，程序退出才会被清除
-- 函数的 VO ===AO: 激活函数时，AO 创建
+- global variable: 在任何 EC 前创建的对象,其属性可以在程序的任何位置引用,程序退出才会被清除
+- 函数的 VO ===AO: 激活函数时,AO 创建
 
 ### Scope chain
 
-- EC 相关的属性，用于变量的查找
+- EC 相关的属性,用于变量的查找
 - Scope Chain = [[Scope]] + AO
 - function create
   - [[Scope]]存储所有父对象[[Scope]]
@@ -36,11 +36,11 @@ order: 99
 
 ### this
 
-- 是 EC 的属性。在进入 EC 时确定且在 EC 运行时不变
-- 由 caller 提供，并且由调用表达式的形式决定(Reference)
+- 是 EC 的属性.在进入 EC 时确定且在 EC 运行时不变
+- 由 caller 提供,并且由调用表达式的形式决定(Reference)
 - 一个 caller 调用一个 callee: AO.callee = null.callee
 - with 和 try catch
-- 严格模式，没有隐式 window
+- 严格模式,没有隐式 window
 
 ### function
 
@@ -52,7 +52,7 @@ order: 99
 - expression
   - 只在表达式位置定义
   - 可以有一个可选的名称
-  - 内部函数递归也可以用此名字，但外部不能访问
+  - 内部函数递归也可以用此名字,但外部不能访问
   - 对 VO 没有影响
   - 在 code 执行阶段 create
 
@@ -139,7 +139,7 @@ return F
 
 ### [[prototype]]
 
-存在于每一个对象上，用来将物件写入到 prototype 中
+存在于每一个对象上,用来将物件写入到 prototype 中
 
 ### [[class]]
 
@@ -155,7 +155,7 @@ return F
 
 ### [[construct]]
 
-构造一个对象。通过 new 调用。实现这种内部方法的函数是构造函数
+构造一个对象.通过 new 调用.实现这种内部方法的函数是构造函数
 
 ### [[put]]
 
@@ -232,7 +232,7 @@ return F
 
 ### [[Reference]]
 
-- GetBase()：Returns the base object component of the reference V.
+- GetBase():Returns the base object component of the reference V.
 - GetPropertyName(V). Returns the property name component of the reference V
 - GetValue()
 

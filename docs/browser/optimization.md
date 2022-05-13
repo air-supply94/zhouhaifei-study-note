@@ -49,12 +49,12 @@ order: 7
 
 ## css 优化
 
-- 避免使用@import，外部的 css 文件中使用@import 会使得页面在加载时增加额外的延迟
+- 避免使用@import,外部的 css 文件中使用@import 会使得页面在加载时增加额外的延迟
 - 避免过分重排
 - css 动画启用 GPU 加速,css3 转换,css3d 变换
 - 有选择地使用选择器(从右往左匹配)
-  - 保持简单，不要使用嵌套过多过于复杂的选择器
-  - 通配符和属性选择器效率最低，需要匹配的元素最多，尽量避免使用。
+  - 保持简单,不要使用嵌套过多过于复杂的选择器
+  - 通配符和属性选择器效率最低,需要匹配的元素最多,尽量避免使用.
   - 不要使用类选择器和 ID 选择器修饰元素标签
 - 减少使用昂贵的属性
   - box-shadow
@@ -116,7 +116,7 @@ order: 7
 
 ### 懒加载原理
 
-当图片出现在可视区域时，获取图片的真实地址并赋值给图片即可
+当图片出现在可视区域时,获取图片的真实地址并赋值给图片即可
 
 - [lazysizes](https://github.com/aFarkas/lazysizes)
 - [react-lazyload](https://github.com/twobin/react-lazyload)
@@ -134,14 +134,14 @@ function foo() {
   let textnode = document.createTextNode('time.geekbang');
   new_node.appendChild(textnode);
   document.getElementById('mian_div').appendChild(new_node);
-  // 由于要获取到 offsetHeight，
-  // 但是此时的 offsetHeight 还是老的数据，
+  // 由于要获取到 offsetHeight,
+  // 但是此时的 offsetHeight 还是老的数据,
   // 所以需要立即执行布局操作
   console.log(main_div.offsetHeight);
 }
 ```
 
-- 避免布局抖动: 是指在一次 JavaScript 执行过程中，多次执行强制布局和抖动操作
+- 避免布局抖动: 是指在一次 JavaScript 执行过程中,多次执行强制布局和抖动操作
 
 ```js
 function foo() {

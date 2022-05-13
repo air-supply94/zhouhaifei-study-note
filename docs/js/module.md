@@ -14,7 +14,7 @@ order: 13
 
 - 每个文件就是一个模块,有自己的作用域
 - 再次执行 require 命令不会再次执行该模块,而是到缓存之中取值
-- `模块输出的是exports对象`
+- `模块输出的是module的exports属性,模块内部的exports变量是外部传入的参数`
 - `模块是运行时加载`
 - `加载是运行时同步加载`
 
@@ -77,21 +77,21 @@ Module._load = function (request, parent, isMain) {
   //  计算绝对路径
   var filename = Module._resolveFilename(request, parent);
 
-  //  第一步：如果有缓存，取出缓存
+  //  第一步:如果有缓存,取出缓存
   var cachedModule = Module._cache[filename];
   if (cachedModule) {
     return cachedModule.exports;
   }
-  // 第二步：是否为内置模块
+  // 第二步:是否为内置模块
   if (NativeModule.exists(filename)) {
     return NativeModule.require(filename);
   }
 
-  // 第三步：生成模块实例，存入缓存
+  // 第三步:生成模块实例,存入缓存
   var module = new Module(filename, parent);
   Module._cache[filename] = module;
 
-  // 第四步：加载模块
+  // 第四步:加载模块
   try {
     module.load(filename);
     hadException = false;
@@ -101,7 +101,7 @@ Module._load = function (request, parent, isMain) {
     }
   }
 
-  // 第五步：输出模块的exports属性
+  // 第五步:输出模块的exports属性
   return module.exports;
 };
 ```
@@ -110,17 +110,17 @@ Module._load = function (request, parent, isMain) {
 
 ```js
 Module._resolveFilename = function (request, parent) {
-  // 第一步：如果是内置模块，不含路径返回
+  // 第一步:如果是内置模块,不含路径返回
   if (NativeModule.exists(request)) {
     return request;
   }
 
-  // 第二步：确定所有可能的路径
+  // 第二步:确定所有可能的路径
   var resolvedModule = Module._resolveLookupPaths(request, parent);
   var id = resolvedModule[0];
   var paths = resolvedModule[1];
 
-  // 第三步：确定哪一个路径为真
+  // 第三步:确定哪一个路径为真
   var filename = Module._findPath(request, paths);
   if (!filename) {
     var err = new Error("Cannot find module '" + request + "'");
@@ -135,10 +135,10 @@ Module._resolveFilename = function (request, parent) {
 
 ```js
 Module._findPath = function (request, paths) {
-  // 列出所有可能的后缀名：.js，.json, .node
+  // 列出所有可能的后缀名:.js,.json, .node
   var exts = Object.keys(Module._extensions);
 
-  // 如果是绝对路径，就不再搜索
+  // 如果是绝对路径,就不再搜索
   if (request.charAt(0) === '/') {
     paths = [''];
   }
@@ -146,45 +146,45 @@ Module._findPath = function (request, paths) {
   // 是否有后缀的目录斜杠
   var trailingSlash = request.slice(-1) === '/';
 
-  // 第一步：如果当前路径已在缓存中，就直接返回缓存
+  // 第一步:如果当前路径已在缓存中,就直接返回缓存
   var cacheKey = JSON.stringify({ request: request, paths: paths });
   if (Module._pathCache[cacheKey]) {
     return Module._pathCache[cacheKey];
   }
 
-  // 第二步：依次遍历所有路径
+  // 第二步:依次遍历所有路径
   for (var i = 0, PL = paths.length; i < PL; i++) {
     var basePath = path.resolve(paths[i], request);
     var filename;
 
     if (!trailingSlash) {
-      // 第三步：是否存在该模块文件
+      // 第三步:是否存在该模块文件
       filename = tryFile(basePath);
 
       if (!filename && !trailingSlash) {
-        // 第四步：该模块文件加上后缀名，是否存在
+        // 第四步:该模块文件加上后缀名,是否存在
         filename = tryExtensions(basePath, exts);
       }
     }
 
-    // 第五步：目录中是否存在 package.json
+    // 第五步:目录中是否存在 package.json
     if (!filename) {
       filename = tryPackage(basePath, exts);
     }
 
     if (!filename) {
-      // 第六步：是否存在目录名 + index + 后缀名
+      // 第六步:是否存在目录名 + index + 后缀名
       filename = tryExtensions(path.resolve(basePath, 'index'), exts);
     }
 
-    // 第七步：将找到的文件路径存入返回缓存，然后返回
+    // 第七步:将找到的文件路径存入返回缓存,然后返回
     if (filename) {
       Module._pathCache[cacheKey] = filename;
       return filename;
     }
   }
 
-  // 第八步：没有找到文件，返回false
+  // 第八步:没有找到文件,返回false
   return false;
 };
 ```
@@ -248,9 +248,9 @@ Module.prototype._compile = function (content, filename) {
 ### 特点
 
 - 自动采用严格模式
-- 模块之中，顶层的 this 关键字返回 undefined
-- 同一个模块如果加载多次，将只执行一次
-- `ES6 模块输出的是值的引用(原始值可变)`
+- 模块之中,顶层的 this 关键字返回 undefined
+- 同一个模块如果加载多次,将只执行一次
+- `ES6 模块输出的是值的引用`
 - `模块是编译时输出接口`
 - `import 命令是异步加载`,有一个独立的模块依赖的解析阶段
 
