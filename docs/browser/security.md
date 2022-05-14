@@ -150,8 +150,7 @@ http://localhost:3000/?xss=<script>alert('你被xss攻击了')</script>
 ### 如何防止
 
 - Cookie 的 SameSite
-- 验证请求的来源站点(origin)
-- CSRF Token
+- Token
 
 ## CSP(内容安全策略)
 
