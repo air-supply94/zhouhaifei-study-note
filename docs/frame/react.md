@@ -184,3 +184,15 @@ function FiberNode(tag: WorkTag, pendingProps: mixed, key: null | string, mode: 
 - 高阶组件: 参数是组件,返回值为新组件的函数.主要用于: 抽取公共逻辑和渲染劫持
   - 丢失静态函数
   - refs 属性不能透传(React.forwardRef)
+
+## render 阶段
+
+dfs 的 performUnitOfWork
+
+### beginWork
+
+![beginWork](../assets/frame/react/beginWork.png)
+
+### completeWork
+
+![completeWork](../assets/frame/react/completeWork.png)
