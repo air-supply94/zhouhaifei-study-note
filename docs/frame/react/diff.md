@@ -96,3 +96,49 @@ function reconcileSingleElement(returnFiber: Fiber, currentFirstChild: Fiber | n
 
 - 当 child !== null 且 key 相同且 type 不同时执行 deleteRemainingChildren 将 child 及其兄弟 fiber 都标记删除
 - 当 child !== null 且 key 不同时仅将 child 标记删除
+
+## 多节点
+
+### 处理情况
+
+- 节点更新: 执行更新逻辑
+- 节点新增或减少: 执行新增、删除逻辑
+- 节点位置变化
+
+### 整体逻辑
+
+- 第一轮遍历: 处理更新的节点
+- 第二轮遍历: 处理剩下的不属于更新的节点
+
+### 第一轮
+
+- 遍历 newChildren,将 newChildren 与 oldFiber 比较,判断 DOM 节点是否可复用
+- 如果可复用,继续比较 newChildren 与 oldFiber.sibling,可以复用则继续遍历
+- 如果不可复用
+  - key 不同导致不可复用,立即跳出整个遍历,第一轮遍历结束
+  - key 相同 type 不同导致不可复用,会将 oldFiber 标记为 DELETION,并继续遍历
+- 如果 newChildren 遍历完或者 oldFiber 遍历完跳出遍历,第一轮遍历结束
+
+### 第一轮结果
+
+- newChildren 和 oldFiber 都没有遍历完
+- newChildren 和 oldFiber 至少有一个遍历完
+
+## 第二轮
+
+- newChildren 与 oldFiber 同时遍历完: Diff 结束
+- newChildren 没遍历完,oldFiber 遍历完: 本次更新有新节点插入,遍历剩下的 newChildren 为生成的 workInProgress fiber 依次标记 Placement
+- newChildren 遍历完, oldFiber 没遍历完: 本次更新比之前的节点数量少,有节点被删除了.遍历剩下的 oldFiber,依次标记 Deletion
+- newChildren 与 oldFiber 都没遍历完: 有节点在这次更新中改变了位置
+
+### 移动节点
+
+- 将未处理的 oldFiber 存入以 key 为 key,oldFiber 为 value 的 Map 中
+
+```js
+const existingChildren = mapRemainingChildren(returnFiber, oldFiber);
+```
+
+- 遍历剩余 newChildren，通过 newChildren.key 就能在 existingChildren 中找到 key 相同的 oldFiber
+
+### 标记节点是否移动
