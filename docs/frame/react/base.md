@@ -1,21 +1,21 @@
 ---
-title: React
-order: 5
+title: 前置
+order: 1
+group:
+  order: 5
 ---
 
 ## 参考
 
 - [React 技术揭秘](https://react.iamkasong.com/)
 
-## 前置
-
-### 理念
+## 理念
 
 - 构建快速响应的大型 Web 应用程序
 - CPU 瓶颈: 在浏览器每一帧的时间中,预留一些时间给 JS 线程,React 利用这部分时间更新组件
 - IO 瓶颈: 将同步的更新变为可中断的异步更新
 
-### 核心思路
+## 核心思路
 
 - 声明式: 声明式编程的优势在于直观,可以做到一目了然,也便于组合
   - 命令式编程的主要思想是关注计算机执行的步骤
@@ -86,7 +86,7 @@ Renderer 根据 Reconcile 为虚拟 DOM 打的标记,同步执行对应的 DOM �
 
 ### 含义
 
-- 架构: 15 的 Reconcile 称为 stack Reconcile。16 的 Reconcile 基于 Fiber 节点实现,被称为 Fiber Reconcile
+- 架构: 15 的 Reconcile 称为 stack Reconcile.16 的 Reconcile 基于 Fiber 节点实现,被称为 Fiber Reconcile
 - 数据结构: 每个 Fiber 节点对应一个 React element,保存了该组件的类型、对应的 DOM 节点等信息
 - 工作单元: 每个 Fiber 节点保存了本次更新中该组件改变的状态、要执行的工作
 
@@ -157,17 +157,6 @@ function FiberNode(tag: WorkTag, pendingProps: mixed, key: null | string, mode: 
 - 开启一次新的 render 阶段并构建一棵新的 workInProgress Fiber 树
 - workInProgress Fiber 树在 render 阶段完成构建后进入 commit 阶段渲染到页面上
 
-## 生命周期
-
-![lifeCircle](../assets/frame/react/lifeCircle.png)
-
-- `componentDidCatch`(error, errorInfo)
-- getDerivedStateFromProps(nextProps, previousState) => newState
-- shouldComponentUpdate(nextProps, nextState) => boolean
-- getSnapshotBeforeUpdate(previousProps, previousState) => `snapshot`
-  - 配合 React 新的异步渲染的机制,在 DOM 更新发生前被调用,返回值将作为 componentDidUpdate 的第三个参数
-- componentDidUpdate(previousProps, previousState, `snapshot`)
-
 ## 类组件与函数组件
 
 - 在使用方式和最终呈现效果上都是完全一致的
@@ -184,15 +173,3 @@ function FiberNode(tag: WorkTag, pendingProps: mixed, key: null | string, mode: 
 - 高阶组件: 参数是组件,返回值为新组件的函数.主要用于: 抽取公共逻辑和渲染劫持
   - 丢失静态函数
   - refs 属性不能透传(React.forwardRef)
-
-## render 阶段
-
-dfs 的 performUnitOfWork
-
-### beginWork
-
-![beginWork](../assets/frame/react/beginWork.png)
-
-### completeWork
-
-![completeWork](../assets/frame/react/completeWork.png)

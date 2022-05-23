@@ -1,6 +1,6 @@
 ---
 title: virtualDom
-order: 3
+order: 2
 ---
 
 ## DOM 缺陷
@@ -35,7 +35,7 @@ order: 3
 
 ## MVC 角度
 
-![](../assets/frame/virtualDomMVC.png)
+![](../../assets/frame/virtualDomMVC.png)
 
 - 虚拟 DOM 看成是 MVC 的视图部分
 - 控制器和模型都是由 Redux 提供
