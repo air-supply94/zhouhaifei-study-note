@@ -142,3 +142,8 @@ const existingChildren = mapRemainingChildren(returnFiber, oldFiber);
 - 遍历剩余 newChildren，通过 newChildren.key 就能在 existingChildren 中找到 key 相同的 oldFiber
 
 ### 标记节点是否移动
+
+- lastPlacedIndex: 上一个可复用的节点在 oldFiber 中的位置索引(初始 0)
+- oldIndex: 当前可复用节点在 oldFiber 中的位置索引
+- 如果 oldIndex < lastPlacedIndex,代表本次更新该节点需要向右移动
+- 如果 oldIndex >= lastPlacedIndex,则 lastPlacedIndex = oldIndex
