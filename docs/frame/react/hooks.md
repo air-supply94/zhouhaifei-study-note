@@ -43,7 +43,7 @@ const HooksDispatcherOnUpdate: Dispatcher = {
 ReactCurrentDispatcher.current = current === null || current.memoizedState === null ? HooksDispatcherOnMount : HooksDispatcherOnUpdate;
 ```
 
-## hooks 数据结构
+### hooks 数据结构
 
 ```js
 const hook: Hook = {
@@ -176,7 +176,7 @@ function dispatchAction(fiber, queue, action) {
     didScheduleRenderPhaseUpdateDuringThisPass = didScheduleRenderPhaseUpdate = true;
   } else {
     if (fiber.lanes === NoLanes && (alternate === null || alternate.lanes === NoLanes)) {
-      // ...fiber的updateQueue为空，优化路径
+      // ...fiber的updateQueue为空,优化路径
     }
 
     scheduleUpdateOnFiber(fiber, lane, eventTime);
@@ -185,6 +185,90 @@ function dispatchAction(fiber, queue, action) {
 ```
 
 - fiber 以及 hook.queue 已经通过调用 bind 方法预先作为参数传入
+
+## useEffect
+
+### 异步调度
+
+- before mutation 阶段在 scheduleCallback 中调度 flushPassiveEffects
+- layout 阶段之后将 effectList 赋值给 rootWithPendingPassiveEffects
+- scheduleCallback 触发 flushPassiveEffects
+- flushPassiveEffects 会设置优先级,内部遍历 rootWithPendingPassiveEffects,并执行 flushPassiveEffectsImpl
+
+### flushPassiveEffectsImpl
+
+- 调用 useEffect 在上一次 render 时的销毁函数(所有)
+
+```js
+// pendingPassiveHookEffectsUnmount中保存了所有需要执行销毁的useEffect
+const unmountEffects = pendingPassiveHookEffectsUnmount;
+pendingPassiveHookEffectsUnmount = [];
+for (let i = 0; i < unmountEffects.length; i += 2) {
+  const effect = ((unmountEffects[i]: any): HookEffect);
+  const fiber = ((unmountEffects[i + 1]: any): Fiber);
+  const destroy = effect.destroy;
+  effect.destroy = undefined;
+
+  if (typeof destroy === 'function') {
+    // 销毁函数存在则执行
+    try {
+      destroy();
+    } catch (error) {
+      captureCommitPhaseError(fiber, error);
+    }
+  }
+}
+```
+
+- 存储销毁函数和回调函数(layout 阶段 commitLayoutEffectOnFiber 方法内部的 schedulePassiveEffects)
+
+```js
+function schedulePassiveEffects(finishedWork: Fiber) {
+  const updateQueue: FunctionComponentUpdateQueue | null = (finishedWork.updateQueue: any);
+  const lastEffect = updateQueue !== null ? updateQueue.lastEffect : null;
+  if (lastEffect !== null) {
+    const firstEffect = lastEffect.next;
+    let effect = firstEffect;
+    do {
+      const { next, tag } = effect;
+      if ((tag & HookPassive) !== NoHookEffect && (tag & HookHasEffect) !== NoHookEffect) {
+        // 向`pendingPassiveHookEffectsUnmount`数组内`push`要销毁的effect
+        enqueuePendingPassiveHookEffectUnmount(finishedWork, effect);
+        // 向`pendingPassiveHookEffectsMount`数组内`push`要执行回调的effect
+        enqueuePendingPassiveHookEffectMount(finishedWork, effect);
+      }
+      effect = next;
+    } while (effect !== firstEffect);
+  }
+}
+```
+
+- 调用该 useEffect 在本次 render 时的回调函数
+
+```js
+// pendingPassiveHookEffectsMount中保存了所有需要执行回调的useEffect
+const mountEffects = pendingPassiveHookEffectsMount;
+pendingPassiveHookEffectsMount = [];
+for (let i = 0; i < mountEffects.length; i += 2) {
+  const effect = ((mountEffects[i]: any): HookEffect);
+  const fiber = ((mountEffects[i + 1]: any): Fiber);
+
+  try {
+    const create = effect.create;
+    effect.destroy = create();
+  } catch (error) {
+    captureCommitPhaseError(fiber, error);
+  }
+}
+```
+
+- 如果存在同步任务,不需要等待下次事件循环的宏任务,提前执行他
+
+## useLayoutEffect
+
+- 类似 useEffect,但是是同步执行,无需调度
+- `mutation 阶段会同步执行` useLayoutEffect hook 的销毁函数
+- `layout 阶段会同步执行` useLayoutEffect hook 的回调函数
 
 ## useMemo 和 useCallback
 
@@ -231,7 +315,7 @@ function updateMemo<T>(nextCreate: () => T, deps: Array<mixed> | void | null): T
       }
     }
   }
-  // 变化，重新计算value
+  // 变化,重新计算value
   const nextValue = nextCreate();
   hook.memoizedState = [nextValue, nextDeps];
   return nextValue;
@@ -254,7 +338,7 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
     }
   }
 
-  // 变化，将新的callback作为value
+  // 变化,将新的callback作为value
   hook.memoizedState = [callback, nextDeps];
   return callback;
 }
@@ -349,10 +433,10 @@ function commitDetachRef(current: Fiber) {
   const currentRef = current.ref;
   if (currentRef !== null) {
     if (typeof currentRef === 'function') {
-      // function类型ref，调用他，传参为null
+      // function类型ref,调用他,传参为null
       currentRef(null);
     } else {
-      // 对象类型ref，current赋值为null
+      // 对象类型ref,current赋值为null
       currentRef.current = null;
     }
   }
