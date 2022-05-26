@@ -259,3 +259,148 @@ function updateCallback<T>(callback: T, deps: Array<mixed> | void | null): T {
   return callback;
 }
 ```
+
+## useRef
+
+### mount
+
+```js
+function mountRef<T>(initialValue: T) {
+  // 获取当前useRef hook
+  const hook = mountWorkInProgressHook();
+  // 创建ref
+  const ref = { current: initialValue };
+  hook.memoizedState = ref;
+  return ref;
+}
+```
+
+### update
+
+```js
+function updateRef<T>(initialValue: T) {
+  // 获取当前useRef hook
+  const hook = updateWorkInProgressHook();
+  // 返回保存的数据
+  return hook.memoizedState;
+}
+```
+
+### React.createRef
+
+```js
+export function createRef(): RefObject {
+  const refObject = {
+    current: null,
+  };
+  return refObject;
+}
+```
+
+### ref 的工作流程
+
+- HostComponent、ClassComponent、ForwardRef 可以赋值 ref 属性
+- ForwardRef 只是将 ref 作为第二个参数传递下去,不会进入 ref 的工作流程
+- render 阶段为含有 ref 属性的 fiber 添加 Ref effectTag
+- commit 阶段为包含 Ref effectTag 的 fiber 执行对应操作
+
+### render 阶段
+
+```js
+// beginWork的markRef
+function markRef(current: Fiber | null, workInProgress: Fiber) {
+  const ref = workInProgress.ref;
+  if ((current === null && ref !== null) || (current !== null && current.ref !== ref)) {
+    // Schedule a Ref effect
+    workInProgress.effectTag |= Ref;
+  }
+}
+
+// completeWork的markRef
+function markRef(workInProgress: Fiber) {
+  workInProgress.effectTag |= Ref;
+}
+```
+
+- beginWork: `updateClassComponent`内的 finishClassComponent,`updateHostComponent`
+- completeWork: `HostComponent`类型、`ScopeComponent`类型
+
+### commit 阶段
+
+- mutation 阶段中,对于 ref 属性改变的情况,需要先移除之前的 ref
+
+```js
+function commitMutationEffects(root: FiberRoot, renderPriorityLevel) {
+  while (nextEffect !== null) {
+    const effectTag = nextEffect.effectTag;
+    // ...
+
+    if (effectTag & Ref) {
+      const current = nextEffect.alternate;
+      if (current !== null) {
+        // 移除之前的ref
+        commitDetachRef(current);
+      }
+    }
+  }
+}
+
+function commitDetachRef(current: Fiber) {
+  const currentRef = current.ref;
+  if (currentRef !== null) {
+    if (typeof currentRef === 'function') {
+      // function类型ref，调用他，传参为null
+      currentRef(null);
+    } else {
+      // 对象类型ref，current赋值为null
+      currentRef.current = null;
+    }
+  }
+}
+```
+
+- mutation 阶段中,对于 Deletion effectTag 的 fiber 执行 commitDeletion
+
+```js
+function safelyDetachRef(current: Fiber) {
+  const ref = current.ref;
+  if (ref !== null) {
+    if (typeof ref === 'function') {
+      try {
+        ref(null);
+      } catch (refError) {
+        captureCommitPhaseError(current, refError);
+      }
+    } else {
+      ref.current = null;
+    }
+  }
+}
+```
+
+- layout 阶段 commitLayoutEffect 会执行 commitAttachRef(赋值 ref)
+
+```js
+function commitAttachRef(finishedWork: Fiber) {
+  const ref = finishedWork.ref;
+  if (ref !== null) {
+    // 获取ref属性对应的Component实例
+    const instance = finishedWork.stateNode;
+    let instanceToUse;
+    switch (finishedWork.tag) {
+      case HostComponent:
+        instanceToUse = getPublicInstance(instance);
+        break;
+      default:
+        instanceToUse = instance;
+    }
+
+    // 赋值ref
+    if (typeof ref === 'function') {
+      ref(instanceToUse);
+    } else {
+      ref.current = instanceToUse;
+    }
+  }
+}
+```
