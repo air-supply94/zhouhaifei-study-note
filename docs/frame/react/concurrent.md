@@ -98,3 +98,104 @@ var IDLE_PRIORITY_TIMEOUT = maxSigned31BitInt;
 - taskQueue: 保存已就绪任务
 - 每当有新的未就绪的任务被注册,插入 timerQueue 并根据开始时间重新排列 timerQueue 中任务的顺序
 - 当 timerQueue 中有任务就绪(startTime <= currentTime)取出并加入 taskQueue.取出 taskQueue 中最早过期的任务并执行他
+
+```js
+const continuationCallback = callback(didUserCallbackTimeout);
+currentTime = getCurrentTime();
+if (typeof continuationCallback === 'function') {
+  // continuationCallback是函数
+  currentTask.callback = continuationCallback;
+  markTaskYield(currentTask, currentTime);
+} else {
+  if (enableProfiling) {
+    markTaskCompleted(currentTask, currentTime);
+    currentTask.isQueued = false;
+  }
+  if (currentTask === peek(taskQueue)) {
+    // 将当前任务清除
+    pop(taskQueue);
+  }
+}
+advanceTimers(currentTime);
+```
+
+## lane
+
+### 概念
+
+- 使用 31 位的二进制表示 31 条赛道,位数越小的赛道优先级越高,某些相邻的赛道拥有相同优先级
+- 越低优先级的更新越容易被打断,导致积压下来,所以需要更多的位
+- 最高优的同步更新不需要多余的 lanes
+
+```js
+export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000;
+export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000;
+
+export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001;
+export const SyncBatchedLane: Lane = /*                 */ 0b0000000000000000000000000000010;
+
+export const InputDiscreteHydrationLane: Lane = /*      */ 0b0000000000000000000000000000100;
+const InputDiscreteLanes: Lanes = /*                    */ 0b0000000000000000000000000011000;
+
+const InputContinuousHydrationLane: Lane = /*           */ 0b0000000000000000000000000100000;
+const InputContinuousLanes: Lanes = /*                  */ 0b0000000000000000000000011000000;
+
+export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000100000000;
+export const DefaultLanes: Lanes = /*                   */ 0b0000000000000000000111000000000;
+
+const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000001000000000000;
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111110000000000000;
+
+const RetryLanes: Lanes = /*                            */ 0b0000011110000000000000000000000;
+
+export const SomeRetryLane: Lanes = /*                  */ 0b0000010000000000000000000000000;
+
+export const SelectiveHydrationLane: Lane = /*          */ 0b0000100000000000000000000000000;
+
+const NonIdleLanes = /*                                 */ 0b0000111111111111111111111111111;
+
+export const IdleHydrationLane: Lane = /*               */ 0b0001000000000000000000000000000;
+const IdleLanes: Lanes = /*                             */ 0b0110000000000000000000000000000;
+
+export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000;
+```
+
+## 批量(lanes)
+
+```js
+const InputDiscreteLanes: Lanes = /*                    */ 0b0000000000000000000000000011000;
+export const DefaultLanes: Lanes = /*                   */ 0b0000000000000000000111000000000;
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111110000000000000;
+```
+
+### 交集
+
+```js
+export function includesSomeLane(a: Lanes | Lane, b: Lanes | Lane) {
+  return (a & b) !== NoLanes;
+}
+```
+
+### 子集
+
+```js
+export function isSubsetOfLanes(set: Lanes, subset: Lanes | Lane) {
+  return (set & subset) === subset;
+}
+```
+
+### 合并
+
+```js
+export function mergeLanes(a: Lanes | Lane, b: Lanes | Lane): Lanes {
+  return a | b;
+}
+```
+
+### 移除
+
+```js
+export function removeLanes(set: Lanes, subset: Lanes | Lane): Lanes {
+  return set & ~subset;
+}
+```
