@@ -139,7 +139,7 @@ function reconcileSingleElement(returnFiber: Fiber, currentFirstChild: Fiber | n
 const existingChildren = mapRemainingChildren(returnFiber, oldFiber);
 ```
 
-- 遍历剩余 newChildren，通过 newChildren.key 就能在 existingChildren 中找到 key 相同的 oldFiber
+- 遍历剩余 newChildren,通过 newChildren.key 就能在 existingChildren 中找到 key 相同的 oldFiber
 
 ### 标记节点是否移动
 
