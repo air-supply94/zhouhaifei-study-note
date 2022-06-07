@@ -76,8 +76,7 @@ otherWindow.postMessage(message, targetOrigin, [transfer]);
 - Access-Control-Expose-Headers: 允许浏览器访问的头
 - Access-Control-Max-Age: seconds
 - Access-Control-Allow-Credentials: true
-  - 指定了当浏览器的 credentials 设置为 true 时是否允许浏览器读取 response 的内容
-  - 当用在对 preflight 预检测请求的响应中时,它指定了实际的请求是否可以使用 credentials
+  - 是否可以将对请求的响应暴露给页面(cookies,authorization headers)
 - XMLHTTPRequest 的 withCredentials 代表是否发送身份凭证信息
 - Access-Control-Allow-Methods: GET,POST | \*
   - 用于预检请求的响应.指明了实际请求所允许使用的 HTTP 方法

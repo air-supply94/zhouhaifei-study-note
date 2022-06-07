@@ -269,7 +269,6 @@ div、p、li、h1、h2、h3、h4
 - 表格单元格 display: table-cell
 - 表格标题 display: table-caption
 - 溢出元素 overflow: hidden/scroll/auto/inherit
-- 弹性盒子 display: flex/inline-flex
 
 ### BFC 特性
 

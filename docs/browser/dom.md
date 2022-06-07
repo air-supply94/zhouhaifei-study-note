@@ -83,7 +83,7 @@ order: 2
   - true: 在捕获阶段执行
   - false(默认): 在冒泡阶段执行
 - EventTarget.removeEventListener(event, function)
-- EventTarget.dispatchEvent(Event, target): 调用 Event.preventDefault(),则返回值为 false;否则返回 true
+- EventTarget.dispatchEvent(Event): 调用 Event.preventDefault(),则返回值为 false;否则返回 true
 - Event(type, options)
   - bubbles: 可选,Boolean 类型,默认值为 false
   - cancelable: 可选,Boolean 类型,默认值为 false

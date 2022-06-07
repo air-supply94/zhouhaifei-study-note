@@ -81,10 +81,6 @@ nav:
 }
 ```
 
-### 解决方案
-
-- `@babel/preset-env` + `@babel/runtime-corejs3` + `@babel/plugin-transform-runtime`
-
 ## 处理流程
 
 ![](../assets/frame/babelProcess.png)
