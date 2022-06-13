@@ -70,11 +70,14 @@ order: 11
 
 ### match(regExp)
 
-返回结果和 exec 类似
+- 会把字符串转换为正则
+- 如果使用 g 标志,则将返回与完整正则表达式匹配的所有结果,但不会返回捕获组。
+- 如果未使用 g 标志,返回 exec 一样的结果
 
 ### search(string || regExp)
 
-找到则对应索引,否则-1
+- 会把字符串转换为正则
+- 找到则对应索引,否则-1
 
 ### replace(String || RegExp, newValue || callback)
 
