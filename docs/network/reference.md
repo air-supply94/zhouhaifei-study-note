@@ -2,7 +2,7 @@
 title: reference
 order: 0
 nav:
-  title: network
+  title: 网络
   order: 2
 ---
 

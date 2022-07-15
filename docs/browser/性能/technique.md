@@ -1,5 +1,5 @@
 ---
-title: optimization
+title: 方法
 order: 7
 ---
 

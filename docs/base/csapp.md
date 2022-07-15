@@ -1,8 +1,8 @@
 ---
-title: csapp
+title: 深入理解计算机系统
 order: 1
 nav:
-  title: base
+  title: 计算机基础
   order: 5
 ---
 

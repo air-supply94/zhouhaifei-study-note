@@ -2,7 +2,7 @@
 title: babel
 order: 1
 nav:
-  title: frame
+  title: 框架
   order: 1
 ---
 

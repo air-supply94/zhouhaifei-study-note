@@ -1,21 +1,7 @@
 ---
-title: performance
-order: 6
+title: 指标
+order: 1
 ---
-
-## DOMContentLoaded
-
-构建 DOM 所需要的 HTML 文件、JavaScript 文件、CSS 文件都已经下载完成了
-
-## Load
-
-已经加载了所有的资源(图像、样式表等)
-
-## Queuing
-
-- 当浏览器发起一个请求的时候,会有很多原因导致该请求不能被立即执行,而是需要排队等待
-- 排队时间过久,大概率是由浏览器为每个域名最多维护 6 个连接导致的
-- 开启 http2
 
 ## CLS
 
