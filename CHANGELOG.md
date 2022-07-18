@@ -1,7 +1,9 @@
-# 0.0.0 (2022-06-13)
+# 0.0.0 (2022-07-18)
 
 ### Features
 
+- **browser:** 增加性能相关指标 ([6fb0ec8](https://github.com/air-supply94/zhouhaifei-study-note/commit/6fb0ec8c94716124f33ea612d0d6a69128a9db62))
+- **browser:** 更新 css 文档 ([a377b7a](https://github.com/air-supply94/zhouhaifei-study-note/commit/a377b7a5d852a30008b7970f0843ba65506f3eb4))
 - **docs:** add babel.md ([1e89996](https://github.com/air-supply94/zhouhaifei-study-note/commit/1e8999628e8896e2e4c446af931018381c609982))
 - **docs:** add babel.md ([8bc3844](https://github.com/air-supply94/zhouhaifei-study-note/commit/8bc384485c69efc8fbc1988fcf8f2883958bafac))
 - **docs:** add bom ([c5caef2](https://github.com/air-supply94/zhouhaifei-study-note/commit/c5caef21a3be405ad196a156d0f1d8034ce30c24))
@@ -35,6 +37,7 @@
 - **docs:** update network ([dfea3de](https://github.com/air-supply94/zhouhaifei-study-note/commit/dfea3de23a60d76158091d18c7c213534bda69d4))
 - **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
 - **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
+- **ecmascript:** 更新字符串方法 ([b904514](https://github.com/air-supply94/zhouhaifei-study-note/commit/b9045148bd6f4ed3db9420c4a04be3d7cfd2e5ae))
 - **frame:** add concurrent.md ([8847ee8](https://github.com/air-supply94/zhouhaifei-study-note/commit/8847ee8afd282548cd3e22727b6f67bd6088b513))
 - **frame:** add hooks.md ([b79f472](https://github.com/air-supply94/zhouhaifei-study-note/commit/b79f4722dabb871f5358891987d9f0959b0a3d50))
 - **frame:** add react.md ([3c12a91](https://github.com/air-supply94/zhouhaifei-study-note/commit/3c12a91edb19d6e373350dc18ff7fcd62ce03689))

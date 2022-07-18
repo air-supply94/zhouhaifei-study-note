@@ -3,73 +3,58 @@ title: 指标
 order: 1
 ---
 
-## CLS
+## 加载
 
-Cumulative Layout Shift 累积布局偏移
+### DNS 查询
 
-### 概念
+- 公式: performance.timing.domainLookupEnd - performance.timing.domainLookupStart
 
-测量整个页面生命周期内发生的所有意外布局偏移中最大一连串的布局偏移分数
+### TCP 链接
 
-### 目标
+- 公式: performance.timing.connectEnd - performance.timing.connectStart
 
-分数控制在 0.1 以内
+### TTFB
 
-## FCP
+- 概念: Time to First Byte.即用户浏览器接收页面内容的第一个字节所需的时间
+- 临界点: 600 毫秒
+- 可能原因
+  - 服务器生成页面数据的时间过久
+  - 网络
+  - 发送请求头时带上了多余的用户信息
 
-First Contentful Paint 首次内容绘制
+### 白屏时间
 
-### 概念
+- 公式: performance.timing.domLoading - performance.timing.fetchStart
 
-指标测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.包含文本、图像、svg 元素、非白色 canvas
+### FCP
 
-### 目标
+- 名称: First Contentful Paint 首次内容绘制
+- 概念: 测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.文本或者图像或者 svg 元素或者非白色 canvas
+- 目标: 1.8 秒以内
 
-1.8s 以内
+### LCP
 
-## LCP
+- 名称: Largest Contentful Paint 最大内容绘制
+- 概念: 根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
+- 目标: 2.5 秒以内
 
-Largest Contentful Paint 最大内容绘制
+## 交互性
 
-### 概念
+### FID
 
-根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
+- 名称: First Input Delay 首次输入延迟
+- 概念: 测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应,并实际能够开始处理事件处理程序所经过的时间
+- 目标: 控制在 100 毫秒以内
 
-### 目标
+## 视觉稳定
 
-控制在 2.5 秒以内
+### CLS
 
-## FID
+- 名称: Cumulative Layout Shift 累积布局偏移
+- 概念: 测量整个页面生命周期内发生的所有意外布局偏移中最大一连串的布局偏移分数
+- 目标: 分数控制在 0.1 以内
 
-First Input Delay 首次输入延迟
-
-### 概念
-
-测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应,并实际能够开始处理事件处理程序所经过的时间
-
-### 目标
-
-控制在 100 毫秒以内
-
-## TTFB
-
-### 概念
-
-Time to First Byte,即用户浏览器接收页面内容的第一个字节所需的时间
-
-### 临界点
-
-600 毫秒
-
-### 可能原因
-
-- 服务器生成页面数据的时间过久
-- 网络
-- 发送请求头时带上了多余的用户信息
-
-## performance.timing
-
-### 说明
+## 说明
 
 - connectStart 和 connectEnd: TCP 建立连接和连接成功的时间节点
 - domComplete: html 文档完全解析完毕的时间节点
@@ -82,12 +67,9 @@ Time to First Byte,即用户浏览器接收页面内容的第一个字节所需�
 - redirectStart 和 redirectEnd
 - responseStart 和 responseEnd
 
-### 主要指标
+## 主要指标
 
-- DNS 查询耗时 = domainLookupEnd - domainLookupStart
-- TCP 链接耗时 = connectEnd - connectStart
 - request 请求耗时 = responseEnd - responseStart
 - 解析 dom 树耗时 = domComplete - domInteractive
-- 白屏时间 = domLoading - fetchStart
 - domReady 时间 = domContentLoadedEventEnd - fetchStart
 - onload 时间 = loadEventEnd - fetchStart
