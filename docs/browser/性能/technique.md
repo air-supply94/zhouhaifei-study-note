@@ -1,6 +1,6 @@
 ---
 title: 方法
-order: 7
+order: 3
 ---
 
 ## 加载优化
@@ -175,3 +175,14 @@ Virtual List
 
 - [react-virtualized](https://github.com/bvaughn/react-virtualized)
 - [react-window](https://github.com/bvaughn/react-window)
+
+## 待定
+
+- 本地缓存
+- DNS 查询
+- HTTP 请求
+- 数据缓存
+  - Service Worker
+  - 本地存储的接口缓存和 CDN
+- 重定向
+- 页面解析和渲染阶段

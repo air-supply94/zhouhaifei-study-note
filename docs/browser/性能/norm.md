@@ -1,75 +1,152 @@
 ---
 title: 指标
-order: 1
+order: 2
 ---
 
-## 加载
+---
 
-### DNS 查询
+## 重定向
 
-- 公式: performance.timing.domainLookupEnd - performance.timing.domainLookupStart
+performance.timing.redirectEnd - performance.timing.redirectStart
 
-### TCP 链接
+## DNS 查询
 
-- 公式: performance.timing.connectEnd - performance.timing.connectStart
+performance.timing.domainLookupEnd - performance.timing.domainLookupStart
 
-### TTFB
+## TCP 连接
 
-- 概念: Time to First Byte.即用户浏览器接收页面内容的第一个字节所需的时间
-- 临界点: 600 毫秒
-- 可能原因
-  - 服务器生成页面数据的时间过久
-  - 网络
-  - 发送请求头时带上了多余的用户信息
+performance.timing.connectEnd - performance.timing.connectStart
 
-### 白屏时间
+## TTFB
 
-- 公式: performance.timing.domLoading - performance.timing.fetchStart
+Time to First Byte.即用户浏览器接收页面内容的第一个字节所需的时间(临界点 600ms)
 
-### FCP
+### 可能原因
 
-- 名称: First Contentful Paint 首次内容绘制
-- 概念: 测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.文本或者图像或者 svg 元素或者非白色 canvas
-- 目标: 1.8 秒以内
+- 服务器生成页面数据的时间过久
+- 网络
+- 发送请求头时带上了多余的用户信息
 
-### LCP
+## 白屏时间
 
-- 名称: Largest Contentful Paint 最大内容绘制
-- 概念: 根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
-- 目标: 2.5 秒以内
+### 公式
 
-## 交互性
+performance.timing.domLoading - performance.timing.fetchStart
 
-### FID
+### 目标
 
-- 名称: First Input Delay 首次输入延迟
-- 概念: 测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应,并实际能够开始处理事件处理程序所经过的时间
-- 目标: 控制在 100 毫秒以内
+1s 以内
 
-## 视觉稳定
+## FCP
 
-### CLS
+First Contentful Paint 首次内容绘制。测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.文本或者图像或者 svg 元素或者非白色 canvas
 
-- 名称: Cumulative Layout Shift 累积布局偏移
-- 概念: 测量整个页面生命周期内发生的所有意外布局偏移中最大一连串的布局偏移分数
-- 目标: 分数控制在 0.1 以内
+### 目标
 
-## 说明
+1.8s 以内
 
-- connectStart 和 connectEnd: TCP 建立连接和连接成功的时间节点
-- domComplete: html 文档完全解析完毕的时间节点
-- domContentLoadedEventStart 和 domContentLoadedEventEnd
-- domInteractive: 解析 html 文档的状态为 interactive 时的时间节点
-- domLoading: 开始解析 html 文档的时间节点
-- domainLookupStart 和 domainLookupEnd
-- fetchStart: 是指在浏览器发起任何请求之前的时间值
-- loadEventStart 和 loadEventEnd: onload 事件触发和结束的时间节点
-- redirectStart 和 redirectEnd
-- responseStart 和 responseEnd
+## LCP
 
-## 主要指标
+Largest Contentful Paint 最大内容绘制。根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
 
-- request 请求耗时 = responseEnd - responseStart
-- 解析 dom 树耗时 = domComplete - domInteractive
-- domReady 时间 = domContentLoadedEventEnd - fetchStart
-- onload 时间 = loadEventEnd - fetchStart
+### 目标
+
+2.5s 以内
+
+---
+
+## FID
+
+First Input Delay 首次输入延迟。测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应,并实际能够开始处理事件处理程序所经过的时间
+
+### 目标
+
+100ms 以内
+
+## FPS
+
+### 判断标准
+
+连续 n(3)次 fps 小与一个最小值(20)
+
+### 代码
+
+```js
+var fps_compatibility = (function () {
+  return (
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    function (callback) {
+      window.setTimeout(callback, 1000 / 60);
+    }
+  );
+})();
+
+var fps_config = {
+  lastTime: performance.now(),
+
+  lastFameTime: performance.now(),
+
+  frame: 0,
+};
+
+var fps_loop = function () {
+  var _first = performance.now();
+  var _diff = _first - fps_config.lastFameTime;
+
+  fps_config.lastFameTime = _first;
+  fps_config.frame++;
+
+  if (_first > 1000 + fps_config.lastTime) {
+    var fps = Math.round((fps_config.frame * 1000) / (_first - fps_config.lastTime));
+
+    console.log(`time: ${new Date()} fps is：`, fps);
+
+    fps_config.frame = 0;
+
+    fps_config.lastTime = _first;
+  }
+
+  fps_compatibility(fps_loop);
+};
+
+fps_loop();
+
+function isBlocking(fpsList, below = 20, last = 3) {
+  var count = 0;
+
+  for (var i = 0; i < fpsList.length; i++) {
+    if (fpsList[i] && fpsList[i] < below) {
+      count++;
+    } else {
+      count = 0;
+    }
+
+    if (count >= last) {
+      return true;
+    }
+  }
+
+  return false;
+}
+```
+
+---
+
+### 公式
+
+1000 \* N / X: 假设页面加载用时 X ms,这期间 requestAnimationFrame 执行了 N 次
+
+## CLS
+
+Cumulative Layout Shift 累积布局偏移。测量整个页面生命周期内发生的所有意外布局偏移中最大一连串的布局偏移分数
+
+### 目标
+
+分数控制在 0.1 以内
+
+---
+
+## 网络环境
+
+## 浏览器分布

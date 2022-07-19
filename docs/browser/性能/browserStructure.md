@@ -1,48 +1,11 @@
 ---
-title: bom
-order: 4
+title: 浏览器架构
+order: 1
 ---
-
-## 前端路由
-
-### hash
-
-- hash 指的是地址中#号以及后面的字符,也称为散列值.hash 也称作锚点,本身是用来做页面跳转定位的
-- 散列值是不会随请求发送到服务器端的,所以改变 hash,不会重新加载页面
-- 监听 window 的 hashchange 事件,当散列值改变时,可以通过 location.hash 来获取和设置 hash 值
-- location.hash 值的变化会直接反应到浏览器地址栏
-
-### 触发 hashchange
-
-- 浏览器地址栏散列值的变化(包括浏览器的`前进`、`后退`)
-- 当浏览器地址栏输入 url 带有 hash 且搜索
-- 当只改变浏览器地址栏 URL 的哈希部分,这时按下回车
-- 通过 a 标签跳转到对应锚点
-
-### history 概述
-
-- window.history: 指向 History 对象,表示当前窗口的浏览历史
-- History: 保存了当前窗口访问过的所有页面网址
-- 浏览器工具栏的"前进"和"后退"按钮,其实就是对 History 对象进行操作
-
-### history 属性
-
-- length
-- state: 堆栈最上层的状态值
-- back()
-- forward()
-- go()
-- pushState(state, '', url): 在历史中添加一条记录,不会触发页面刷新
-- replaceState(state, '', url)
-
-### popstate
-
-- 仅调用 pushState()或 replaceState(),并不会触发该事件
-- 只有用户点击浏览器倒退按钮和前进按钮,back(),forward(),go()才会触发
 
 ## 浏览器架构
 
-![](../assets/browser/browserFrame.png)
+![](../../assets/browser/browserFrame.png)
 
 - 浏览器进程: 主要负责界面显示、用户交互、子进程管理,同时提供存储等功能
 - 渲染进程: 核心任务是将 HTML、CSS 和 JavaScript 转换为用户可以与之交互的网页,排版引擎 Blink 和 JavaScript 引擎 V8 都是运行在该进程中,默认情况下,Chrome 会为每个 Tab 标签创建一个渲染进程.运行在沙箱模式下
@@ -52,7 +15,7 @@ order: 4
 
 ## 浏览器渲染
 
-![](../assets/browser/browserRender.svg)
+![](../../assets/browser/browserRender.svg)
 
 ### DOM Tree
 
@@ -69,10 +32,10 @@ HTML 解析成树形的数据结构
 
 ### defer / async
 
-![](../assets/browser/scriptType.png)
+![](../../assets/browser/scriptType.png)
 
-- defer: 遇到 defer 的脚本,在后台进行下载,不会阻止文档渲染,当页面解析&渲染完毕后.会等到所有的 defer 脚本加载完毕并按照顺序执行,执行完毕后会触发 DOMContentLoaded 事件 ![](../assets/browser/deferScript.png)
-- async: 脚本会在加载完毕后执行.async 脚本的加载不计入 DOMContentLoaded ![](../assets/browser/asyncScript.png)
+- defer: 遇到 defer 的脚本,在后台进行下载,不会阻止文档渲染,当页面解析&渲染完毕后.会等到所有的 defer 脚本加载完毕并按照顺序执行,执行完毕后会触发 DOMContentLoaded 事件 ![](../../assets/browser/deferScript.png)
+- async: 脚本会在加载完毕后执行.async 脚本的加载不计入 DOMContentLoaded ![](../../assets/browser/asyncScript.png)
 
 ### CSS Tree
 
@@ -124,59 +87,23 @@ DOM 和 CSSOM 合并后生成 Render Tree
 
 ### 渲染流程总结
 
-![](../assets/browser/browserRenderProcess.png)
+![](../../assets/browser/browserRenderProcess.png)
 
 ### reflow(重排)
 
-![](../assets/browser/reflow.png)
+![](../../assets/browser/reflow.png)
 
 - 通过 JavaScript 或者 CSS 修改元素的几何位置属性,那么浏览器会触发重新布局
 
 ### repaint(重绘)
 
-![](../assets/browser/repaint.png)
+![](../../assets/browser/repaint.png)
 
 - 通过 JavaScript 改变某个元素的背景色、文字颜色、边框颜色等,直接进入 painting,省去了 layout 和 layer tree
 
 ### composite
 
-![](../assets/browser/composite.png)
+![](../../assets/browser/composite.png)
 
 - 渲染引擎将跳过布局和绘制,只执行后续的合成操作
 - CSS 的 transform 来实现动画效果,这可以避开重排和重绘阶段,直接在非主线程上执行合成动画操作
-
-## cookie
-
-### Set-Cookie
-
-Set-Cookie: <cookie 名>=<cookie 值>
-
-### Cookie 请求头
-
-Cookie: key=value;
-
-### 过期时间
-
-- Expires=GMT 格式(毫秒)
-- Max-Age=秒(优先)
-
-### 安全
-
-- Secure: 只应通过被 HTTPS 协议加密过的请求发送给服务端
-- HttpOnly: document.cookie 无法访问
-
-### Domain
-
-指定了哪些主机可以接受 Cookie.如果不指定,默认为 origin,不包含子域名
-
-### Path
-
-指定了主机下的哪些路径可以接受 Cookie
-
-### SameSite
-
-服务器要求某个 cookie 在跨站请求时发送方案
-
-- None: 浏览器会在同站请求、跨站请求下继续发送 cookies,不区分大小写.
-- Strict: 浏览器将只在访问相同站点时发送 cookie
-- Lax: 在跨站点的情况下,从第三方站点的链接打开和从第三方站点提交 Get 方式的表单这两种方式都会携带 Cookie

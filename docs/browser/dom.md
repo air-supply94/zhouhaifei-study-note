@@ -156,3 +156,40 @@ order: 2
 - element.style 既支持读也支持写,我们通过 element.style 即可改写元素的样式
 - getComputedStyle 读取的样式是最终样式,包括了内联样式、嵌入样式和外部样式
 - getComputedStyle 仅支持读并不支持写入
+
+## 前端路由
+
+### hash
+
+- hash 指的是地址中#号以及后面的字符,也称为散列值.hash 也称作锚点,本身是用来做页面跳转定位的
+- 散列值是不会随请求发送到服务器端的,所以改变 hash,不会重新加载页面
+- 监听 window 的 hashchange 事件,当散列值改变时,可以通过 location.hash 来获取和设置 hash 值
+- location.hash 值的变化会直接反应到浏览器地址栏
+
+### 触发 hashchange
+
+- 浏览器地址栏散列值的变化(包括浏览器的`前进`、`后退`)
+- 当浏览器地址栏输入 url 带有 hash 且搜索
+- 当只改变浏览器地址栏 URL 的哈希部分,这时按下回车
+- 通过 a 标签跳转到对应锚点
+
+### history 概述
+
+- window.history: 指向 History 对象,表示当前窗口的浏览历史
+- History: 保存了当前窗口访问过的所有页面网址
+- 浏览器工具栏的"前进"和"后退"按钮,其实就是对 History 对象进行操作
+
+### history 属性
+
+- length
+- state: 堆栈最上层的状态值
+- back()
+- forward()
+- go()
+- pushState(state, '', url): 在历史中添加一条记录,不会触发页面刷新
+- replaceState(state, '', url)
+
+### popstate
+
+- 仅调用 pushState()或 replaceState(),并不会触发该事件
+- 只有用户点击浏览器倒退按钮和前进按钮,back(),forward(),go()才会触发

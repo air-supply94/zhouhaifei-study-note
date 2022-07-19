@@ -3,6 +3,42 @@ title: security
 order: 7
 ---
 
+## cookie
+
+### Set-Cookie
+
+Set-Cookie: <cookie 名>=<cookie 值>
+
+### Cookie 请求头
+
+Cookie: key=value;
+
+### 过期时间
+
+- Expires=GMT 格式(毫秒)
+- Max-Age=秒(优先)
+
+### 安全
+
+- Secure: 只应通过被 HTTPS 协议加密过的请求发送给服务端
+- HttpOnly: document.cookie 无法访问
+
+### Domain
+
+指定了哪些主机可以接受 Cookie.如果不指定,默认为 origin,不包含子域名
+
+### Path
+
+指定了主机下的哪些路径可以接受 Cookie
+
+### SameSite
+
+服务器要求某个 cookie 在跨站请求时发送方案
+
+- None: 浏览器会在同站请求、跨站请求下继续发送 cookies,不区分大小写.
+- Strict: 浏览器将只在访问相同站点时发送 cookie
+- Lax: 在跨站点的情况下,从第三方站点的链接打开和从第三方站点提交 Get 方式的表单这两种方式都会携带 Cookie
+
 ## 同源策略
 
 ### 同源
