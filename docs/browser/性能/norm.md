@@ -35,7 +35,7 @@ performance.timing.domLoading - performance.timing.fetchStart
 
 ### 目标
 
-1s 以内
+300ms 以内
 
 ## FCP
 
@@ -150,3 +150,9 @@ Cumulative Layout Shift 累积布局偏移。测量整个页面生命周期内�
 ## 网络环境
 
 ## 浏览器分布
+
+## PV(访问量)
+
+- 相关页面排行
+
+## UV(独立访客)
