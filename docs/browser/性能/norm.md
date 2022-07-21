@@ -151,8 +151,16 @@ Cumulative Layout Shift 累积布局偏移。测量整个页面生命周期内�
 
 ## 浏览器分布
 
+- google
+- edge
+- fireFox
+- ie
+- 360 极速
+- 其他
+
 ## PV(访问量)
 
-- 相关页面排行
+- 页面 path
+- 相关页面排行(TOP30)
 
 ## UV(独立访客)
