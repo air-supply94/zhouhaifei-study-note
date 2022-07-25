@@ -5,63 +5,65 @@ order: 2
 
 ---
 
-## 重定向
-
-performance.timing.redirectEnd - performance.timing.redirectStart
-
-## DNS 查询
-
-performance.timing.domainLookupEnd - performance.timing.domainLookupStart
-
-## TCP 连接
-
-performance.timing.connectEnd - performance.timing.connectStart
-
-## TTFB
-
-Time to First Byte.即用户浏览器接收页面内容的第一个字节所需的时间(临界点 600ms)
-
-### 可能原因
-
-- 服务器生成页面数据的时间过久
-- 网络
-- 发送请求头时带上了多余的用户信息
-
-## 白屏时间
-
-### 公式
-
-performance.timing.domLoading - performance.timing.fetchStart
-
-### 目标
-
-300ms 以内
+## [PerformanceTiming](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceTiming)
 
 ## FCP
 
-First Contentful Paint 首次内容绘制。测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.文本或者图像或者 svg 元素或者非白色 canvas
+- First Contentful Paint 首次内容绘制。测量页面从开始加载到页面内容的任何部分在屏幕上完成渲染的时间.文本或者图像或者 svg 元素或者非白色 canvas
+- `1.8s 以内`
 
-### 目标
+## `LCP`
 
-1.8s 以内
+- Largest Contentful Paint 最大内容绘制。根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
+- `2.5s 以内`
 
-## LCP
+### 所有记录时间点
 
-Largest Contentful Paint 最大内容绘制。根据页面首次开始加载的时间点来报告可视区域内可见的最大图像或文本块完成渲染的相对时间
+- `navigationStart`
+- `redirectStart`和`redirectEnd`
+- `domainLookupEnd`和`domainLookupStart`
+- `connectEnd`和`connectStart`
+- `requestStart`和`responseStart`和`responseEnd`
+- `domLoading`和`domInteractive`和`domContentLoadedEventEnd`和`domComplete`和`loadEventEnd`
 
-### 目标
+### 重定向
 
-2.5s 以内
+performance.timing.redirectEnd - performance.timing.redirectStart
+
+### DNS 查询
+
+performance.timing.domainLookupEnd - performance.timing.domainLookupStart
+
+### TCP 连接
+
+performance.timing.connectEnd - performance.timing.connectStart
+
+### `请求耗时`
+
+performance.timing.responseStart - performance.timing.requestStart
+
+### `内容传输`
+
+performance.timing.responseEnd - performance.timing.responseStart
+
+### `资源解析`
+
+performance.timing.domLoading - performance.timing.responseEnd
+
+### `dom解析`
+
+performance.timing.domInteractive - performance.timing.domLoading
+
+### `dom渲染及资源加载`
+
+performance.timing.domComplete - performance.timing.domInteractive
 
 ---
 
 ## FID
 
-First Input Delay 首次输入延迟。测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应,并实际能够开始处理事件处理程序所经过的时间
-
-### 目标
-
-100ms 以内
+- First Input Delay 首次输入延迟。测量从用户第一次与页面交互(单击链接、点按钮)直到浏览器对交互作出响应,并实际能够开始处理事件处理程序所经过的时间
+- `100ms 以内`
 
 ## FPS
 
@@ -137,14 +139,6 @@ function isBlocking(fpsList, below = 20, last = 3) {
 
 1000 \* N / X: 假设页面加载用时 X ms,这期间 requestAnimationFrame 执行了 N 次
 
-## CLS
-
-Cumulative Layout Shift 累积布局偏移。测量整个页面生命周期内发生的所有意外布局偏移中最大一连串的布局偏移分数
-
-### 目标
-
-分数控制在 0.1 以内
-
 ---
 
 ## 网络环境
@@ -164,3 +158,6 @@ Cumulative Layout Shift 累积布局偏移。测量整个页面生命周期内�
 - 相关页面排行(TOP30)
 
 ## UV(独立访客)
+
+- cookie
+- 浏览器 id(收费)
