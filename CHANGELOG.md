@@ -1,9 +1,9 @@
-# 0.0.0 (2022-07-25)
+# 0.0.0 (2022-07-27)
 
 ### Features
 
 - **browser:** 增加性能相关指标 ([6fb0ec8](https://github.com/air-supply94/zhouhaifei-study-note/commit/6fb0ec8c94716124f33ea612d0d6a69128a9db62))
-- **browser:** 更新性能指标 ([22c479a](https://github.com/air-supply94/zhouhaifei-study-note/commit/22c479a6716ac0f7a9ebe87b035f8d4aba4245da))
+- **browser:** 更新性能指标 ([30ed76b](https://github.com/air-supply94/zhouhaifei-study-note/commit/30ed76b088b27868c4e2a196dcebc6a6d7a03608))
 - **browser:** 更新性能指标 ([44e08c0](https://github.com/air-supply94/zhouhaifei-study-note/commit/44e08c03044df4aa11510543ee1ba0433a046fd0))
 - **browser:** 更新性能指标 ([7fd076f](https://github.com/air-supply94/zhouhaifei-study-note/commit/7fd076f51b5225dbd8165c6d7bdd9ad57abf45d4))
 - **browser:** 更新性能指标 ([95d5b41](https://github.com/air-supply94/zhouhaifei-study-note/commit/95d5b414da2651a5cc600ad9c8809081edb5beda))

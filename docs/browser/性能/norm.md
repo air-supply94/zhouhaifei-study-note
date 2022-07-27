@@ -143,6 +143,8 @@ function isBlocking(fpsList, below = 20, last = 3) {
 
 ## 网络环境
 
+- 2 个请求图片(1 字节或者几十字节)的响应时间求平均
+
 ## 浏览器分布
 
 - google
