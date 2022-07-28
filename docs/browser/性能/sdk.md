@@ -50,13 +50,16 @@ order: 3
 - 小程序
 - app
 
-### 产品类型
+### 产品类型(技术架构)
 
-- erp 的 ts
-- erp 的 js
-- 云仓
-- boss
-
-### 用户 id 识别
+### 唯一 id
 
 - pc2 种方案: cookie 和浏览器 id(精确更高的需要收费)
+
+### 样本
+
+## FCP、LCP
+
+### 原理
+
+web-vitals 下的 getFCP、getLCP
