@@ -60,7 +60,7 @@ DOM 和 CSSOM 合并后生成 Render Tree
 - 样式计算: 为对应的 DOM 元素选择对应的样式信息
 - 计算布局: 计算布局树中每个元素对应的几何位置
 
-### [LayerTree](./css/#层叠上下文)
+### [LayerTree](../css/important-concepts#层叠上下文)
 
 渲染引擎为特定的节点生成专用的图层
 
