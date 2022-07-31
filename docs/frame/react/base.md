@@ -161,19 +161,16 @@ function FiberNode(tag: WorkTag, pendingProps: mixed, key: null | string, mode: 
   - 模板不应该是开发过程中的关注点,因为引入了模板语法、模板指令等概念,是一种不佳的实现方案
   - 模板字符串编写的结构会造成多次内部嵌套,使整个结构变得复杂,并且优化代码提示也会变得困难重重
 
-## 类组件与函数组件
+### 类组件与函数组件
 
 - 在使用方式和最终呈现效果上都是完全一致的
 - 类组件面向对象编程(type 为 function),函数组件面向函数式编程(type 为 class)
 - 类组件特有的生命周期
+- ClassComponent 实例原型上的 isReactComponent 变量判断是否是 ClassComponent
 
-## 设计组件
+### JSX 与 Fiber 节点
 
-- `展示组件`: 展示组件内部是没有状态管理,完全受制于外部的 props 控制
-- 代理组件: 常用于封装常用属性,减少重复代码
-- 样式组件: 是一种代理组件,只是又细分了处理样式领域
-- 布局组件: 基本设计与样式组件完全一样,主要用于安放其他组件
-- `容器组件`: 几乎没有复用性,`拉取数据与组合组件`
-- 高阶组件: 参数是组件,返回值为新组件的函数.主要用于: 抽取公共逻辑和渲染劫持
-  - 丢失静态函数
-  - refs 属性不能透传(React.forwardRef)
+JSX 是一种描述当前组件内容的数据结构,他不包含组件 schedule、reconcile、render 所需的相关信息
+
+- 在组件 mount 时,Reconcile 根据 JSX 描述的组件内容生成组件对应的 Fiber 节点
+- update 时,Reconcile 将 JSX 与 Fiber 节点保存的数据对比,生成组件对应的 Fiber 节点,并根据对比结果为 Fiber 节点打上标记

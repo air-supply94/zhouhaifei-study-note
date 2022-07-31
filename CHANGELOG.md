@@ -1,9 +1,11 @@
-# 0.0.0 (2022-07-29)
+# 0.0.0 (2022-07-31)
 
 ### Features
 
 - **browser:** 增加性能相关指标 ([6fb0ec8](https://github.com/air-supply94/zhouhaifei-study-note/commit/6fb0ec8c94716124f33ea612d0d6a69128a9db62))
 - **browser:** 增加浏览器检测类型和版本代码 ([b8ca587](https://github.com/air-supply94/zhouhaifei-study-note/commit/b8ca587fd437a4219c6c2d120ceee250ccd6fa61))
+- **browser:** 增加首屏设计 ([4d29cb9](https://github.com/air-supply94/zhouhaifei-study-note/commit/4d29cb97c570cb060613854bf5de6fa18b62eb43))
+- **browser:** 更新 skd 说明 ([dd7905a](https://github.com/air-supply94/zhouhaifei-study-note/commit/dd7905a94b8f704f4316940994eab5950e02ce48))
 - **browser:** 更新性能指标 ([100a952](https://github.com/air-supply94/zhouhaifei-study-note/commit/100a952d4413686450fc2c48dc873204ccf905ea))
 - **browser:** 更新性能指标 ([30ed76b](https://github.com/air-supply94/zhouhaifei-study-note/commit/30ed76b088b27868c4e2a196dcebc6a6d7a03608))
 - **browser:** 更新性能指标 ([44e08c0](https://github.com/air-supply94/zhouhaifei-study-note/commit/44e08c03044df4aa11510543ee1ba0433a046fd0))
@@ -44,7 +46,8 @@
 - **docs:** 更新文档 ([3f507e6](https://github.com/air-supply94/zhouhaifei-study-note/commit/3f507e6103c8852dc7dd351963aeb6975646c7da))
 - **docs:** 更新文档 ([9fa1dba](https://github.com/air-supply94/zhouhaifei-study-note/commit/9fa1dba5d8d83c853a9da096157a4de08901e0fb))
 - **ecmascript:** 更新字符串方法 ([b904514](https://github.com/air-supply94/zhouhaifei-study-note/commit/b9045148bd6f4ed3db9420c4a04be3d7cfd2e5ae))
-- **frame/react:** 更新一些说明 ([e9e095a](https://github.com/air-supply94/zhouhaifei-study-note/commit/e9e095aa4986b1ea0507a6327ecbe9733d2d4b27))
+- **frame/react:** 更新一些说明 ([e106bd8](https://github.com/air-supply94/zhouhaifei-study-note/commit/e106bd82893ad8b57db1b8a78290a592d5eee2f7))
+- **frame/react:** 更新一些说明 ([11a0d70](https://github.com/air-supply94/zhouhaifei-study-note/commit/11a0d70cfaea9ca7a8a71627e38c7abe68a480b1))
 - **frame/react:** 更新一些说明 ([8f77bd9](https://github.com/air-supply94/zhouhaifei-study-note/commit/8f77bd9c9dfc302bec27dc3e14e9a8db45cad11e))
 - **frame:** add concurrent.md ([8847ee8](https://github.com/air-supply94/zhouhaifei-study-note/commit/8847ee8afd282548cd3e22727b6f67bd6088b513))
 - **frame:** add hooks.md ([b79f472](https://github.com/air-supply94/zhouhaifei-study-note/commit/b79f4722dabb871f5358891987d9f0959b0a3d50))
